@@ -17,6 +17,15 @@ public class ContaCliente {
     private Double vlLimite;
     private Double vlSaldo;
     private String DsTipoConta;
+    private int nrSenha;
+
+    public int getNrSenha() {
+        return nrSenha;
+    }
+
+    public void setNrSenha(int nrSenha) {
+        this.nrSenha = nrSenha;
+    }
 
     public int getCdConta() {
         return cdConta;

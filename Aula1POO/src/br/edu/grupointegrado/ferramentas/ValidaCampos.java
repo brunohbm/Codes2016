@@ -39,7 +39,7 @@ public class ValidaCampos extends ConexaoOracle {
                 for (int cont = 1; cont <= numColumns; cont++) {
                     String columnName = metaData.getColumnName(cont);
                     int obrigatorio = metaData.isNullable(cont);
-                    if (columnName.equals(columnName)) {
+                    if (nome.equals(columnName)) {
                         if (conteudo.equals("") && obrigatorio == 0 && chave != 1) {
                             JOptionPane.showMessageDialog(null, "Campo " + text + " é obrigatório");
                             field.grabFocus();

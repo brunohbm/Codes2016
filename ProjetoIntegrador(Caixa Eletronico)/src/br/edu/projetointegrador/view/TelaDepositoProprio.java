@@ -11,11 +11,11 @@ import br.edu.projetointegrador.controlhe.Operacao;
  *
  * @author CrasyFox
  */
-public class TelaTransferencia extends javax.swing.JFrame {
+public class TelaDepositoProprio extends javax.swing.JFrame {
 
-    Operacao operacao = new Operacao();
-    
-    public TelaTransferencia(Operacao operacao) {
+    public Operacao operacao = new Operacao();
+
+    public TelaDepositoProprio(Operacao operacao) {
         this.operacao = operacao;
         initComponents();
     }
@@ -29,16 +29,18 @@ public class TelaTransferencia extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTFValor = new javax.swing.JTextField();
         jBConfirma = new javax.swing.JButton();
         jBCancelar = new javax.swing.JButton();
-        jTFValor = new javax.swing.JTextField();
-        jTFConta = new javax.swing.JTextField();
-        jTFAgencia = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTFValor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFValorActionPerformed(evt);
+            }
+        });
 
         jBConfirma.setText("Confirmar");
         jBConfirma.addActionListener(new java.awt.event.ActionListener() {
@@ -54,28 +56,6 @@ public class TelaTransferencia extends javax.swing.JFrame {
             }
         });
 
-        jTFValor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFValorActionPerformed(evt);
-            }
-        });
-
-        jTFConta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFContaActionPerformed(evt);
-            }
-        });
-
-        jTFAgencia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFAgenciaActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setText("Agencia");
-
-        jLabel3.setText("Conta");
-
         jLabel1.setText("Valor");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -85,43 +65,25 @@ public class TelaTransferencia extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(66, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addGap(28, 28, 28)
+                        .addComponent(jTFValor, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addComponent(jBCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBConfirma, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(50, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(28, 28, 28)
-                                .addComponent(jTFValor, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(28, 28, 28)
-                                .addComponent(jTFConta, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(28, 28, 28)
-                                .addComponent(jTFAgencia, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(jBConfirma, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(46, 46, 46))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTFAgencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTFConta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(29, 29, 29)
+                .addContainerGap(92, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(44, 44, 44)
+                .addGap(82, 82, 82)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBConfirma, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -131,29 +93,21 @@ public class TelaTransferencia extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTFValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFValorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFValorActionPerformed
+
     private void jBConfirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfirmaActionPerformed
-        TelaTransferenciaConfirmacao tela = new TelaTransferenciaConfirmacao(operacao);
+        TelaDepositoPConfirmacao tela = new TelaDepositoPConfirmacao(operacao);
         tela.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jBConfirmaActionPerformed
 
     private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed
-        TelaMenu tela = new TelaMenu(false, operacao);
+        TelaMenu tela = new TelaMenu(true, operacao);
         tela.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jBCancelarActionPerformed
-
-    private void jTFValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFValorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFValorActionPerformed
-
-    private void jTFContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFContaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFContaActionPerformed
-
-    private void jTFAgenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFAgenciaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFAgenciaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,14 +126,46 @@ public class TelaTransferencia extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaTransferencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaDepositoProprio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaTransferencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaDepositoProprio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaTransferencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaDepositoProprio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaTransferencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaDepositoProprio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -189,10 +175,6 @@ public class TelaTransferencia extends javax.swing.JFrame {
     private javax.swing.JButton jBCancelar;
     private javax.swing.JButton jBConfirma;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTFAgencia;
-    private javax.swing.JTextField jTFConta;
     private javax.swing.JTextField jTFValor;
     // End of variables declaration//GEN-END:variables
 }

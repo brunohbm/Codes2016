@@ -6,19 +6,41 @@
 package br.edu.projetointegrador.controlhe;
 
 import br.edu.projetointegrador.ferramenta.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
  * @author CrasyFox
  */
-public class Operacao extends Statement{
-    
+public class Operacao extends Statement {
+
     private int cdOpercao;
     private ContaCliente contaFavorecida;
     private ContaCliente conta;
-    private Operacao operacao;
-    private Banco banco;
+    private TipoOperacao tipoOperacao;
     private Agencia agencia;
+    private String dtOperacao;
+    private String hrOperacao;
+    private String vlOperacao;
+    private String dsObservacao;
+
+    public void cadastrar() {
+        Date data = new Date();
+        super.registrar(dtOperacao, new Object[]{
+            super.autoIncrem("OPERACAO", "CD_OPERACAO"),
+            getContaFavorecida().getCdConta(),
+            getConta().getCdConta(),
+            tipoOperacao.getCdTipoOperacao(),
+            agencia.getBanco().getCdBanco(),
+            agencia.getCdAgencia(),
+            data,
+            data.getTime(),
+            getVlOperacao(),
+            getDsObservacao()
+        }
+        );
+    }
 
     public int getCdOpercao() {
         return cdOpercao;
@@ -44,20 +66,12 @@ public class Operacao extends Statement{
         this.conta = conta;
     }
 
-    public Operacao getOperacao() {
-        return operacao;
+    public TipoOperacao getTipoOperacao() {
+        return tipoOperacao;
     }
 
-    public void setOperacao(Operacao operacao) {
-        this.operacao = operacao;
-    }
-
-    public Banco getBanco() {
-        return banco;
-    }
-
-    public void setBanco(Banco banco) {
-        this.banco = banco;
+    public void setTipoOperacao(TipoOperacao tipoOperacao) {
+        this.tipoOperacao = tipoOperacao;
     }
 
     public Agencia getAgencia() {
@@ -99,14 +113,5 @@ public class Operacao extends Statement{
     public void setDsObservacao(String dsObservacao) {
         this.dsObservacao = dsObservacao;
     }
-    private String dtOperacao;
-    private String hrOperacao;
-    private String vlOperacao;
-    private String dsObservacao;
-    
-    public void cadastrar(){
-        super.registrar(dtOperacao, new Object[] {
-            super.autoIncrem("OPERACAO", "CD_OPERACAO"),
-            
-    }
+
 }

@@ -11,11 +11,11 @@ import br.edu.projetointegrador.controlhe.Operacao;
  *
  * @author CrasyFox
  */
-public class TelaTransferencia extends javax.swing.JFrame {
+public class TelaDepositoTerceiro extends javax.swing.JFrame {
 
-    Operacao operacao = new Operacao();
+    public Operacao operacao = new Operacao();
     
-    public TelaTransferencia(Operacao operacao) {
+    public TelaDepositoTerceiro(Operacao operacao) {
         this.operacao = operacao;
         initComponents();
     }
@@ -32,11 +32,11 @@ public class TelaTransferencia extends javax.swing.JFrame {
         jBConfirma = new javax.swing.JButton();
         jBCancelar = new javax.swing.JButton();
         jTFValor = new javax.swing.JTextField();
-        jTFConta = new javax.swing.JTextField();
-        jTFAgencia = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jTFConta = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jTFAgencia = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,23 +60,23 @@ public class TelaTransferencia extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Valor");
+
         jTFConta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTFContaActionPerformed(evt);
             }
         });
 
+        jLabel3.setText("Conta");
+
+        jLabel4.setText("Agencia");
+
         jTFAgencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTFAgenciaActionPerformed(evt);
             }
         });
-
-        jLabel4.setText("Agencia");
-
-        jLabel3.setText("Conta");
-
-        jLabel1.setText("Valor");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -109,7 +109,7 @@ public class TelaTransferencia extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+                .addContainerGap(36, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFAgencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
@@ -132,7 +132,7 @@ public class TelaTransferencia extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBConfirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfirmaActionPerformed
-        TelaTransferenciaConfirmacao tela = new TelaTransferenciaConfirmacao(operacao);
+        TelaDepositoTConfirmacao tela = new TelaDepositoTConfirmacao(operacao);
         tela.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jBConfirmaActionPerformed
@@ -172,17 +172,15 @@ public class TelaTransferencia extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaTransferencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaDepositoTerceiro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaTransferencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaDepositoTerceiro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaTransferencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaDepositoTerceiro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaTransferencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaDepositoTerceiro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
-        /* Create and display the form */
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

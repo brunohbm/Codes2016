@@ -10,6 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,8 +22,10 @@ import javax.swing.JOptionPane;
 public class Statement extends ConexaoOracle {
 
     StringBuffer sql = new StringBuffer();
-    
-    public void excluir(String tabela, String colunaChave, int chave){
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat horaFormat = new SimpleDateFormat("HH:mm:ss");
+
+    public void excluir(String tabela, String colunaChave, int chave) {
         sql.delete(0, sql.length());
         sql.append("DELETE FROM ");
         sql.append(tabela);
@@ -44,7 +49,7 @@ public class Statement extends ConexaoOracle {
             sql.append(tabela).append(" ");
             sql.append("SET ");
             for (int cont = 1; cont <= super.metaData.getColumnCount(); cont++) {
-                if(!super.metaData.getColumnName(cont).equalsIgnoreCase(colunaChave)){
+                if (!super.metaData.getColumnName(cont).equalsIgnoreCase(colunaChave)) {
                     sql.append(super.metaData.getColumnName(cont)).append(" = ?,");
                 }
             }
@@ -53,11 +58,15 @@ public class Statement extends ConexaoOracle {
             sql.append(colunaChave);
             sql.append(" = ").append(chave);
             PreparedStatement stmt = ConexaoOracle.prepareStatement(sql.toString());
-            for(int cont = 0; cont < valores.length; cont++){
-                if (valores[cont] instanceof String){
+            for (int cont = 0; cont < valores.length; cont++) {
+                if (valores[cont] instanceof String) {
                     stmt.setString((cont + 1), valores[cont].toString());
-                }else if (valores[cont] instanceof Integer){
+                } else if (valores[cont] instanceof Integer) {
                     stmt.setInt((cont + 1), Integer.parseInt(valores[cont].toString()));
+                } else if (valores[cont] instanceof Date) {
+                    stmt.setString((cont + 1), dateFormat.format(valores[cont]));
+                } else if (valores[cont] instanceof Time) {
+                    stmt.setString((cont + 1), horaFormat.format(valores[cont]));
                 }
             }
             stmt.execute();
@@ -84,6 +93,10 @@ public class Statement extends ConexaoOracle {
                     stmt.setString((cont + 1), valores[cont].toString());
                 } else if (valores[cont] instanceof Integer) {
                     stmt.setInt((cont + 1), Integer.parseInt(valores[cont].toString()));
+                } else if (valores[cont] instanceof Date) {
+                    stmt.setString((cont + 1), dateFormat.format(valores[cont]));
+                } else if (valores[cont] instanceof Time) {
+                    stmt.setString((cont + 1), horaFormat.format(valores[cont]));
                 }
             }
             stmt.execute();

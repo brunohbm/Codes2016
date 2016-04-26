@@ -120,7 +120,7 @@ public class TelaSenha extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFSenhaActionPerformed
 
     private void jBConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfirmarActionPerformed
-       testarSenha(Integer.parseInt(jTFSenha.getText()));
+       testarSenha(Integer.parseInt(jTFSenha.getText()), Integer.parseInt(jTFConta.getText()));
     }//GEN-LAST:event_jBConfirmarActionPerformed
 
     private void jTFContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFContaActionPerformed
@@ -183,8 +183,11 @@ public static void main(String args[]) {
     private javax.swing.JPasswordField jTFSenha;
     // End of variables declaration//GEN-END:variables
 
-    private void testarSenha(int senhaDigitada) {
-       if(senhaDigitada == 123){
+    private void testarSenha(int senha, int conta) {
+        operacao.getConta().setCdConta(conta);
+        operacao.getConta().setNrSenha(senha);
+        operacao.getConta().preecher();
+       if(senha == operacao.getConta().getNrSenha() && conta == operacao.getConta().getCdConta()){
            TelaMenu tela = new TelaMenu(true, operacao);
            tela.setVisible(true);
            this.dispose();

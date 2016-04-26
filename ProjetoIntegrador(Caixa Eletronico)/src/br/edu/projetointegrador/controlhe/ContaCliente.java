@@ -5,25 +5,51 @@
  */
 package br.edu.projetointegrador.controlhe;
 
+import br.edu.projetointegrador.conexao.ConexaoOracle;
+import java.sql.SQLException;
+
 /**
  *
  * @author CrasyFox
  */
-public class ContaCliente {
+public class ContaCliente extends ConexaoOracle {
     
     private int cdConta;
     private Cliente cliente;
     private Agencia agencia;
+    private Banco banco;
     private Double vlLimite;
     private Double vlSaldo;
     private String DsTipoConta;
     private int nrSenha;
+    StringBuffer strBuff = new StringBuffer();
+    
+    public void preecher(){
+        strBuff.delete(0, strBuff.length());
+        strBuff.append("SELECT * FROM CONTA_CLIENTE WHERE CD_CONTA = ");
+        strBuff.append(getCdConta());
+        strBuff.append(" AND NR_SENHA = ");
+        strBuff.append(getNrSenha());
+        executeSQL(strBuff.toString());
+        try {
+            resultSet.first();
+            setCdConta(resultSet.getInt("CD_CONTA"));
+            getCliente().setCdCliente(resultSet.getInt("CD_CLIENTE"));
+            getBanco().setCdBanco(resultSet.getInt("CD_BANCO"));
+            getAgencia().setCdAgencia(resultSet.getInt("CD_AGENCIA"));
+            setVlLimite(resultSet.getDouble("VL_LIMITE"));
+            setVlSaldo(resultSet.getDouble("VL_SALDO"));
+            setDsTipoConta(resultSet.getString("DS_TIPO_CONTA"));
+            setNrSenha(resultSet.getInt("NR_SENHA"));
+        } catch (SQLException sqlEx) {
+        }
+    }
 
     public int getNrSenha() {
         return nrSenha;
     }
 
-    public void setNrSenha(int nrSenha) {
+    public void setNrSenha(int nrSenha) {        
         this.nrSenha = nrSenha;
     }
 
@@ -33,6 +59,9 @@ public class ContaCliente {
 
     public void setCdConta(int cdConta) {
         this.cdConta = cdConta;
+    }
+
+    public ContaCliente() {
     }
 
     public Cliente getCliente() {
@@ -73,6 +102,14 @@ public class ContaCliente {
 
     public void setDsTipoConta(String DsTipoConta) {
         this.DsTipoConta = DsTipoConta;
+    }
+
+    public Banco getBanco() {
+        return banco;
+    }
+
+    public void setBanco(Banco banco) {
+        this.banco = banco;
     }
     
     

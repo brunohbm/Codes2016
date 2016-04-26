@@ -24,8 +24,8 @@ public class Operacao extends Statement {
     private String hrOperacao;
     private String vlOperacao;
     private String dsObservacao;
-
-    public void cadastrar() {
+    
+    public void cadastrar() {        
         Date data = new Date();
         super.registrar(dtOperacao, new Object[]{
             super.autoIncrem("OPERACAO", "CD_OPERACAO"),
@@ -38,6 +38,7 @@ public class Operacao extends Statement {
             data.getTime(),
             getVlOperacao(),
             getDsObservacao()
+                
         }
         );
     }

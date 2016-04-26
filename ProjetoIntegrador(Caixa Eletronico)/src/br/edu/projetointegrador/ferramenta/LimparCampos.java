@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.edu.grupointegrado.ferramentas;
+package br.edu.projetointegrador.ferramenta;
 
 import java.awt.Component;
 import java.awt.Container;
@@ -17,16 +17,17 @@ import javax.swing.JTextField;
  */
 public class LimparCampos {
 
-    public void limparCampos(Container container) {
-        Component components[] = container.getComponents();
-        for (Component component : components) {
-            if (component instanceof JTextField) {
+    public void limparCampos (Container container){
+        Component componentes[] = container.getComponents();
+        
+        for(Component component: componentes){
+            if(component instanceof JTextField){
                 ((JTextField) component).setText("");
-            } else if (component instanceof JFormattedTextField) {
+            }else if(component instanceof JFormattedTextField){
                 ((JFormattedTextField) component).setText("");
-            } else if (component instanceof JPasswordField) {
+            }else if(component instanceof JPasswordField){
                 ((JPasswordField) component).setText("");
             }
-        }
-    }
+        }        
+    }    
 }

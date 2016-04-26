@@ -34,29 +34,30 @@ public class Statement extends ConexaoOracle {
         sql.append(" = ");
         sql.append(chave);
         try {
-            super.deleteSQL(sql.toString());
+            deleteSQL(sql.toString());
         } catch (Exception e) {
         }
     }
 
     public void alterar(String tabela, Object valores[], String colunaChave, int chave) {
-        try {
+        try {            
             sql.delete(0, sql.length());
             sql.append("SELECT * FROM ").append(tabela);
-            super.executeSQL(sql.toString());
-            sql.delete(0, sql.length());
+            executeSQL(sql.toString());
+            sql.delete(0, sql.length());            
             sql.append("UPDATE ");
-            sql.append(tabela).append(" ");
-            sql.append("SET ");
-            for (int cont = 1; cont <= super.metaData.getColumnCount(); cont++) {
-                if (!super.metaData.getColumnName(cont).equalsIgnoreCase(colunaChave)) {
-                    sql.append(super.metaData.getColumnName(cont)).append(" = ?,");
+            sql.append(tabela);
+            sql.append(" SET ");
+            for (int cont = 1; cont <= metaData.getColumnCount(); cont++) {
+                if (!metaData.getColumnName(cont).equalsIgnoreCase(colunaChave)) {
+                    sql.append(metaData.getColumnName(cont)).append(" = ?,");
                 }
             }
-            sql.delete((sql.length() - 1), sql.length());
+            sql.delete((sql.length() - 1), sql.length());           
             sql.append(" WHERE ");
             sql.append(colunaChave);
             sql.append(" = ").append(chave);
+            
             PreparedStatement stmt = ConexaoOracle.prepareStatement(sql.toString());
             for (int cont = 0; cont < valores.length; cont++) {
                 if (valores[cont] instanceof String) {
@@ -79,8 +80,8 @@ public class Statement extends ConexaoOracle {
     public void registrar(String tabela, Object valores[]) {
         sql.delete(0, sql.length());
         sql.append("INSERT INTO ");
-        sql.append(tabela).append(" ");
-        sql.append("VALUES (");
+        sql.append(tabela);
+        sql.append(" VALUES (");
         for (int cont = 1; cont <= valores.length; cont++) {
             sql.append("?,");
         }

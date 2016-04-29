@@ -11,7 +11,7 @@ package br.edu.projetointegrador.controlhe;
  */
 public class Agencia {
     private int cdAgencia;
-    private Banco banco;
+    private Banco banco = new Banco();
     private String nmRua;
     private int nrRua;
     private int nrTelefone;

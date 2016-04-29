@@ -12,8 +12,8 @@ package br.edu.projetointegrador.controlhe;
 public class Cartao {
     
     private int cdCartao;
-    private ContaCliente contaCliente;
-    private Bandeira bandeira;
+    private ContaCliente contaCliente = new ContaCliente();
+    private Bandeira bandeira = new Bandeira();
     private String dsTipo;
 
     public int getCdCartao() {

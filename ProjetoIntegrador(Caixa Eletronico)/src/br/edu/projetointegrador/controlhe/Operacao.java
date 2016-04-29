@@ -16,16 +16,16 @@ import java.util.Date;
 public class Operacao extends Statement {
 
     private int cdOpercao;
-    private ContaCliente contaFavorecida;
-    private ContaCliente conta;
-    private TipoOperacao tipoOperacao;
-    private Agencia agencia;
+    private ContaCliente contaFavorecida = new ContaCliente();
+    private ContaCliente conta = new ContaCliente();
+    private TipoOperacao tipoOperacao = new TipoOperacao();
+    private Agencia agencia = new Agencia();
     private String dtOperacao;
     private String hrOperacao;
     private String vlOperacao;
     private String dsObservacao;
     
-    public void cadastrar() {        
+    public void cadastrar() {
         Date data = new Date();
         super.registrar(dtOperacao, new Object[]{
             super.autoIncrem("OPERACAO", "CD_OPERACAO"),
@@ -38,7 +38,6 @@ public class Operacao extends Statement {
             data.getTime(),
             getVlOperacao(),
             getDsObservacao()
-                
         }
         );
     }

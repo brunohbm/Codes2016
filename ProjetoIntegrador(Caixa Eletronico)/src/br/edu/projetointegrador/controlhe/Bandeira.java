@@ -12,7 +12,7 @@ package br.edu.projetointegrador.controlhe;
 public class Bandeira {
     
     private int cdBandeira;
-    private Operadora operadora;
+    private Operadora operadora = new Operadora();
     private String nmBandeira;
 
     public int getCdBandeira() {

@@ -15,14 +15,22 @@ import java.sql.SQLException;
 public class ContaCliente extends ConexaoOracle {
     
     private int cdConta;
-    private Cliente cliente;
-    private Agencia agencia;
-    private Banco banco;
+    private Cliente cliente = new Cliente();
+    private Agencia agencia = new Agencia();
+    private Banco banco = new Banco();
     private Double vlLimite;
     private Double vlSaldo;
     private String DsTipoConta;
     private int nrSenha;
     StringBuffer strBuff = new StringBuffer();
+    
+    public static void main(String[] args) {
+        ContaCliente c = new ContaCliente();
+        c.setCdConta(1);
+        c.setNrSenha(2331997);
+        c.preecher();
+        System.out.println(c.getVlLimite());
+    }
     
     public void preecher(){
         strBuff.delete(0, strBuff.length());
@@ -30,6 +38,7 @@ public class ContaCliente extends ConexaoOracle {
         strBuff.append(getCdConta());
         strBuff.append(" AND NR_SENHA = ");
         strBuff.append(getNrSenha());
+        System.out.println(strBuff.toString());
         executeSQL(strBuff.toString());
         try {
             resultSet.first();

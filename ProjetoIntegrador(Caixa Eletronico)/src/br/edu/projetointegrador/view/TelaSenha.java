@@ -5,6 +5,7 @@
  */
 package br.edu.projetointegrador.view;
 
+import br.edu.projetointegrador.controlhe.ContaCliente;
 import br.edu.projetointegrador.controlhe.Operacao;
 import javax.swing.JOptionPane;
 

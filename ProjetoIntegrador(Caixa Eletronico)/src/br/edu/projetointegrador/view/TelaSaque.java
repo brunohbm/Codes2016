@@ -6,6 +6,8 @@
 package br.edu.projetointegrador.view;
 
 import br.edu.projetointegrador.controlhe.Operacao;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  *
@@ -14,7 +16,7 @@ import br.edu.projetointegrador.controlhe.Operacao;
 public class TelaSaque extends javax.swing.JFrame {
 
     Operacao operacao = new Operacao();
-    
+
     public TelaSaque(Operacao operacao) {
         initComponents();
     }
@@ -29,6 +31,12 @@ public class TelaSaque extends javax.swing.JFrame {
         jBConfirma = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTFValor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFValorActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Valor");
 
@@ -87,8 +95,19 @@ public class TelaSaque extends javax.swing.JFrame {
     }//GEN-LAST:event_jBCancelarActionPerformed
 
     private void jBConfirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfirmaActionPerformed
-       
+        if (operacao.getConta().getVlSaldo() > Double.parseDouble(jTFValor.getText)) {
+            
+        }
+        
+        
+    ){
+        
+        }
     }//GEN-LAST:event_jBConfirmaActionPerformed
+
+    private void jTFValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFValorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFValorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -118,7 +137,6 @@ public class TelaSaque extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -138,7 +138,7 @@ public class TelaTransferencia extends javax.swing.JFrame {
     }//GEN-LAST:event_jBConfirmaActionPerformed
 
     private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed
-        TelaMenu tela = new TelaMenu(false, operacao);
+        TelaMenu tela = new TelaMenu(true, operacao);
         tela.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jBCancelarActionPerformed

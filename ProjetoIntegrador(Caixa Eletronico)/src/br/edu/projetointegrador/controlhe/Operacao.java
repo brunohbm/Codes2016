@@ -22,7 +22,7 @@ public class Operacao extends Statement {
     private Agencia agencia = new Agencia();
     private String dtOperacao;
     private String hrOperacao;
-    private String vlOperacao;
+    private double vlOperacao;
     private String dsObservacao;
     
     public void cadastrar() {
@@ -98,11 +98,11 @@ public class Operacao extends Statement {
         this.hrOperacao = hrOperacao;
     }
 
-    public String getVlOperacao() {
+    public double getVlOperacao() {
         return vlOperacao;
     }
 
-    public void setVlOperacao(String vlOperacao) {
+    public void setVlOperacao(double vlOperacao) {
         this.vlOperacao = vlOperacao;
     }
 

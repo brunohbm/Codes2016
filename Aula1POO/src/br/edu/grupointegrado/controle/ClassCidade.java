@@ -46,7 +46,7 @@ public class ClassCidade extends ConexaoOracle {
 
     public ResultSet consultaGeral() {
         sql.delete(0, sql.length());
-        sql.append("SELECT * FROM CIDADE");
+        sql.append("SELECT * FROM CIDADE ORDER BY CD_CIDADE ASC");
         executeSQL(sql.toString());
         return resultSet;
     }

@@ -23,12 +23,12 @@
 	<import value="net.sf.jasperreports.engine.*" />
 	<import value="net.sf.jasperreports.engine.data.*" />
 
-	<queryString><![CDATA[select * from cidade
-]]></queryString>
+	<queryString><![CDATA[SELECT M.CD_MODELO, MA.DS_MARCA, M.DS_MODELO, TO_CHAR(M.DT_CADASTRO,'DD/MM/YYYY') AS DT_CADASTRO FROM CAD_MODELO M INNER JOIN CAD_MARCA MA ON MA.CD_MARCA = M.CD_MARCA]]></queryString>
 
-	<field name="CD_CIDADE" class="java.math.BigDecimal"/>
-	<field name="DS_CIDADE" class="java.lang.String"/>
-	<field name="DS_UF" class="java.lang.String"/>
+	<field name="CD_MODELO" class="java.math.BigDecimal"/>
+	<field name="DS_MARCA" class="java.lang.String"/>
+	<field name="DS_MODELO" class="java.lang.String"/>
+	<field name="DT_CADASTRO" class="java.lang.String"/>
 
 		<background>
 			<band height="0"  isSplitAllowed="true" >
@@ -36,22 +36,172 @@
 		</background>
 		<title>
 			<band height="50"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="2"
+						y="0"
+						width="533"
+						height="49"
+						key="staticText-4"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font size="27"/>
+					</textElement>
+				<text><![CDATA[Relatório de cidade]]></text>
+				</staticText>
+				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="476"
+						y="5"
+						width="50"
+						height="42"
+						key="image-3"/>
+					<box></box>
+					<graphicElement stretchType="NoStretch"/>
+					<imageExpression class="java.lang.String"><![CDATA["C:\\Users\\Bruno\\Pictures\\icon\\tumblr_n8g7b7bEQA1r8ldbjo2_1280.jpg"]]></imageExpression>
+				</image>
+				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="8"
+						y="5"
+						width="50"
+						height="41"
+						key="image-4"/>
+					<box></box>
+					<graphicElement stretchType="NoStretch"/>
+					<imageExpression class="java.lang.String"><![CDATA["C:\\Users\\Bruno\\Pictures\\icon\\tumblr_n8g7b7bEQA1r8ldbjo2_1280.jpg"]]></imageExpression>
+				</image>
+				<line direction="TopDown">
+					<reportElement
+						x="2"
+						y="1"
+						width="0"
+						height="0"
+						key="line-2"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="2"
+						y="0"
+						width="533"
+						height="0"
+						key="line-4"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<textField isStretchWithOverflow="false" pattern="dd/MM/yyyy" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="399"
+						y="32"
+						width="70"
+						height="13"
+						key="textField-1"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="h.mm a" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="64"
+						y="32"
+						width="70"
+						height="13"
+						key="textField-2"/>
+					<box></box>
+					<textElement textAlignment="Left">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
 			</band>
 		</title>
 		<pageHeader>
-			<band height="36"  isSplitAllowed="true" >
+			<band height="2"  isSplitAllowed="true" >
+				<line direction="TopDown">
+					<reportElement
+						x="2"
+						y="0"
+						width="533"
+						height="0"
+						key="line-1"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
 			</band>
 		</pageHeader>
 		<columnHeader>
 			<band height="30"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="133"
+						y="9"
+						width="100"
+						height="15"
+						key="staticText-5"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Marca]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="6"
+						y="9"
+						width="100"
+						height="15"
+						key="staticText-7"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Código
+]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="279"
+						y="9"
+						width="100"
+						height="15"
+						key="staticText-8"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Modelo]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="429"
+						y="9"
+						width="100"
+						height="15"
+						key="staticText-9"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Data]]></text>
+				</staticText>
 			</band>
 		</columnHeader>
 		<detail>
-			<band height="100"  isSplitAllowed="true" >
-				<textField isStretchWithOverflow="false" pattern="###0" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+			<band height="20"  isSplitAllowed="true" >
+				<line direction="TopDown">
 					<reportElement
 						x="2"
-						y="1"
+						y="0"
+						width="533"
+						height="0"
+						key="line-8"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="2"
+						y="2"
 						width="100"
 						height="18"
 						key="textField"/>
@@ -59,25 +209,12 @@
 					<textElement>
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$F{CD_CIDADE}]]></textFieldExpression>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$F{CD_MODELO}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="132"
-						y="1"
-						width="164"
-						height="18"
-						key="textField"/>
-					<box></box>
-					<textElement>
-						<font/>
-					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{DS_CIDADE}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="320"
-						y="1"
+						y="2"
 						width="100"
 						height="18"
 						key="textField"/>
@@ -85,7 +222,33 @@
 					<textElement>
 						<font/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{DS_UF}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{DS_MARCA}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="429"
+						y="0"
+						width="100"
+						height="18"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{DT_CADASTRO}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="279"
+						y="2"
+						width="100"
+						height="18"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{DS_MODELO}]]></textFieldExpression>
 				</textField>
 			</band>
 		</detail>

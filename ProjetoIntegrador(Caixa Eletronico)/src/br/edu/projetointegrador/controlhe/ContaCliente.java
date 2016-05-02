@@ -13,7 +13,11 @@ import java.sql.SQLException;
  * @author CrasyFox
  */
 public class ContaCliente extends ConexaoOracle {
-    
+
+    public ContaCliente() {
+
+    }
+
     private int cdConta;
     private Cliente cliente = new Cliente();
     private Agencia agencia = new Agencia();
@@ -23,16 +27,17 @@ public class ContaCliente extends ConexaoOracle {
     private String DsTipoConta;
     private int nrSenha;
     StringBuffer strBuff = new StringBuffer();
-    
-    public static void main(String[] args) {
-        ContaCliente c = new ContaCliente();
-        c.setCdConta(1);
-        c.setNrSenha(2331997);
-        c.preecher();
-        System.out.println(c.getVlLimite());
+
+    public void updateSaldo(double valoOperacao) {
+        strBuff.delete(0, strBuff.length());
+        strBuff.append("UPDATE CONTA_CLIENTE SET VL_SALDO = ");
+        strBuff.append(getVlSaldo() + (valoOperacao));
+        strBuff.append(" WHERE CD_CONTA = ");
+        strBuff.append(getCdConta());
+        atualizarSQL(strBuff.toString());
     }
-    
-    public void preecher(){
+
+    public void preecher() {
         strBuff.delete(0, strBuff.length());
         strBuff.append("SELECT * FROM CONTA_CLIENTE WHERE CD_CONTA = ");
         strBuff.append(getCdConta());
@@ -58,7 +63,7 @@ public class ContaCliente extends ConexaoOracle {
         return nrSenha;
     }
 
-    public void setNrSenha(int nrSenha) {        
+    public void setNrSenha(int nrSenha) {
         this.nrSenha = nrSenha;
     }
 
@@ -68,9 +73,6 @@ public class ContaCliente extends ConexaoOracle {
 
     public void setCdConta(int cdConta) {
         this.cdConta = cdConta;
-    }
-
-    public ContaCliente() {
     }
 
     public Cliente getCliente() {
@@ -120,6 +122,5 @@ public class ContaCliente extends ConexaoOracle {
     public void setBanco(Banco banco) {
         this.banco = banco;
     }
-    
-    
+
 }

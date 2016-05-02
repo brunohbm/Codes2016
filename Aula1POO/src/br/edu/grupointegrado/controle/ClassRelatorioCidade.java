@@ -19,10 +19,10 @@ public class ClassRelatorioCidade {
         try {
             JRResultSetDataSource jrRs = new JRResultSetDataSource(resultSet);
             JasperPrint jasperPrint = JasperFillManager.fillReport(
-                    "C://Users//Bruno//Desktop//Codes//Relatorios",
+                    "C://Users//Bruno//Desktop//Codes//Relatorios//RelatorioTeste.jasper",
                     new HashMap(),
                     jrRs);
-            JasperViewer viewer = new JasperViewer(jasperPrint);
+            JasperViewer viewer = new JasperViewer(jasperPrint, false);
             viewer.setVisible(true);
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Erro com relatório " + erro);

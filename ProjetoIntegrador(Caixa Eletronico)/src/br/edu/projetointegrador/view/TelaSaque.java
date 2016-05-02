@@ -6,8 +6,10 @@
 package br.edu.projetointegrador.view;
 
 import br.edu.projetointegrador.controlhe.Operacao;
+import br.edu.projetointegrador.ferramenta.Escolha;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -95,14 +97,26 @@ public class TelaSaque extends javax.swing.JFrame {
     }//GEN-LAST:event_jBCancelarActionPerformed
 
     private void jBConfirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfirmaActionPerformed
-        if (operacao.getConta().getVlSaldo() > Double.parseDouble(jTFValor.getText)) {
-            
-        }
-        
-        
-    ){
-        
-        }
+        if (operacao.getConta().getVlSaldo() > Double.parseDouble(jTFValor.getText())) {
+            if (operacao.getConta().getVlLimite()> Double.parseDouble(jTFValor.getText())){
+                operacao.getTipoOperacao().setCdTipoOperacao(Escolha.SAQUE);
+                operacao.getAgencia().setCdAgencia(1);
+                operacao.getAgencia().getBanco().setCdBanco(1);               
+                operacao.setVlOperacao(Double.parseDouble(jTFValor.getText()));                
+                operacao.getConta().updateSaldo( - Double.parseDouble(jTFValor.getText()));
+                operacao.cadastrar();
+                
+                TelaInicial tela = new TelaInicial();
+                tela.setVisible(true);
+                this.dispose();
+                
+            }else{
+          JOptionPane.showMessageDialog(null, "Limite excedido. Limite " + operacao.getConta().getVlLimite());      
+            }
+        }else{
+          JOptionPane.showMessageDialog(null, "Saldo Insuficiente. Saldo: " + operacao.getConta().getVlSaldo());
+          jTFValor.grabFocus();
+        }                                    
     }//GEN-LAST:event_jBConfirmaActionPerformed
 
     private void jTFValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFValorActionPerformed

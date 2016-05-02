@@ -1,6 +1,7 @@
 package br.edu.grupointegrado.visao;
 
 import br.edu.grupointegrado.controle.ClassCidade;
+import br.edu.grupointegrado.controle.ClassRelatorioCidade;
 import br.edu.grupointegrado.controle.ClassUF;
 import br.edu.grupointegrado.ferramentas.LimparCampos;
 import br.edu.grupointegrado.ferramentas.PreencherJTableGenerico;
@@ -63,8 +64,9 @@ public class CidadeCadastro extends javax.swing.JFrame {
         jCbTipo = new javax.swing.JComboBox<>();
         jTFConsulta = new javax.swing.JTextField();
         jBTConsulta = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de cidade");
 
         jTPCidade.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -205,7 +207,7 @@ public class CidadeCadastro extends javax.swing.JFrame {
                     .addComponent(JBPesquisaEstado)
                     .addComponent(jTFData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBCarregar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(jPCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jBTCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                     .addComponent(jBTExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
@@ -214,7 +216,7 @@ public class CidadeCadastro extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(jPCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPCadastroLayout.createSequentialGroup()
-                    .addContainerGap(208, Short.MAX_VALUE)
+                    .addContainerGap(210, Short.MAX_VALUE)
                     .addComponent(jBTNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap()))
         );
@@ -262,29 +264,45 @@ public class CidadeCadastro extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Relatório");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPConsultaLayout = new javax.swing.GroupLayout(jPConsulta);
         jPConsulta.setLayout(jPConsultaLayout);
         jPConsultaLayout.setHorizontalGroup(
             jPConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
-            .addGroup(jPConsultaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jCbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jTFConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addComponent(jBTConsulta)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPConsultaLayout.createSequentialGroup()
+                .addGroup(jPConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPConsultaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jCbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTFConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jBTConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 17, Short.MAX_VALUE)))
                 .addGap(24, 24, 24))
         );
         jPConsultaLayout.setVerticalGroup(
             jPConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPConsultaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTFConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPConsultaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTFConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jBTConsulta))
-                .addGap(33, 33, 33)
+                .addGap(1, 1, 1)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -302,9 +320,9 @@ public class CidadeCadastro extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTPCidade)
+                .addComponent(jTPCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 288, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -408,6 +426,10 @@ public class CidadeCadastro extends javax.swing.JFrame {
         );
     }//GEN-LAST:event_JBPesquisaEstadoActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ClassRelatorioCidade relatorio = new ClassRelatorioCidade(cidade.consultaGeral());
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -454,6 +476,7 @@ public class CidadeCadastro extends javax.swing.JFrame {
     private javax.swing.JButton jBTExcluir;
     private javax.swing.JButton jBTGravar;
     private javax.swing.JButton jBTNovo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jCbTipo;
     private javax.swing.JLabel jLCidade;
     private javax.swing.JLabel jLabel1;

@@ -27,12 +27,9 @@ public class ClassModel extends ConexaoOracle {
         sql.append(getInSituacao()).append("', '");
         sql.append(getDtCadastro()).append("') ");
         incluirSQL(sql.toString());
-        
-        
+
     }
 
-
-    
     public void alterar() {
         sql.delete(0, sql.length());
         sql.append("UPDATE CAD_MODELO SET DS_MODELO = '");
@@ -46,7 +43,7 @@ public class ClassModel extends ConexaoOracle {
         sql.append("WHERE CD_MODELO = ");
         sql.append(getCdModelo());
         atualizarSQL(sql.toString());
-        
+
     }
 
     public void deletar() {
@@ -61,6 +58,7 @@ public class ClassModel extends ConexaoOracle {
         sql.append("SELECT M.CD_MODELO, MA.DS_MARCA, M.DS_MODELO, TO_CHAR(M.DT_CADASTRO,'DD/MM/YYYY') AS DT_CADASTRO FROM CAD_MODELO M ");
         sql.append("INNER JOIN CAD_MARCA MA ON MA.CD_MARCA = M.CD_MARCA");
         executeSQL(sql.toString());
+        System.out.println(sql.toString());
         return resultSet;
     }
 
@@ -83,8 +81,8 @@ public class ClassModel extends ConexaoOracle {
         executeSQL(sql.toString());
         return resultSet;
     }
-    
-    public ResultSet consultaCod(){
+
+    public ResultSet consultaCod() {
         sql.delete(0, sql.length());
         sql.append("SELECT M.CD_MARCA, MA.DS_MARCA, M.DS_MODELO, TO_CHAR(M.DT_CADASTRO,'DD/MM/YYYY') AS DT_CADASTRO, M.IN_SITUACAO FROM CAD_MODELO M ");
         sql.append("INNER JOIN CAD_MARCA MA ON MA.CD_MARCA = M.CD_MARCA ");
@@ -94,7 +92,7 @@ public class ClassModel extends ConexaoOracle {
         return resultSet;
     }
 
-    public void retornaModelo(){
+    public void retornaModelo() {
         consultaCod();
         try {
             resultSet.first();
@@ -107,7 +105,30 @@ public class ClassModel extends ConexaoOracle {
             System.out.println(sqlex);
         }
     }
-    
+
+    public ResultSet relatorioEntreDatas(String dataInicial, String dataFinal) {
+        sql.delete(0, sql.length());
+        sql.append("SELECT M.CD_MODELO, MA.DS_MARCA, M.DS_MODELO, TO_CHAR(M.DT_CADASTRO,'DD/MM/YYYY') AS DT_CADASTRO FROM CAD_MODELO M ");
+        sql.append("INNER JOIN CAD_MARCA MA ON MA.CD_MARCA = M.CD_MARCA");
+        sql.append(" WHERE M.DT_CADASTRO BETWEEN '");
+        sql.append(dataInicial).append("' AND '");
+        sql.append(dataFinal).append("' ");
+        executeSQL(sql.toString());
+        return resultSet;
+    }
+
+    public ResultSet relatorioEntreDatasComMarca(String dataInicial, String dataFinal) {
+        sql.delete(0, sql.length());
+        sql.append("SELECT M.CD_MODELO, MA.DS_MARCA, M.DS_MODELO, TO_CHAR(M.DT_CADASTRO,'DD/MM/YYYY') AS DT_CADASTRO FROM CAD_MODELO M ");
+        sql.append("INNER JOIN CAD_MARCA MA ON MA.CD_MARCA = M.CD_MARCA");
+        sql.append(" WHERE M.DT_CADASTRO BETWEEN '");
+        sql.append(dataInicial).append("' AND '");
+        sql.append(dataFinal).append("' ");
+        sql.append("AND M.CD_MARCA IS NOT NULL");
+        executeSQL(sql.toString());
+        return resultSet;
+    }
+
     public int getCdModelo() {
         return cdModelo;
     }
@@ -120,10 +141,10 @@ public class ClassModel extends ConexaoOracle {
         return marca;
     }
 
-    public void setDsMarca(String dsMarca){
+    public void setDsMarca(String dsMarca) {
         this.marca.setDsMarca(dsMarca);
     }
-    
+
     public void setCdMarca(int cdmarca) {
         this.marca.setCdMarca(cdmarca);
     }

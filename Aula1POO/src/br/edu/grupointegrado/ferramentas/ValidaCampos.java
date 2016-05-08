@@ -9,6 +9,7 @@ import br.edu.grupointegrado.conexao.ConexaoOracle;
 import java.awt.Component;
 import java.awt.Container;
 import java.sql.SQLException;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -32,7 +33,7 @@ public class ValidaCampos extends ConexaoOracle {
                 JTextField field = (JTextField) component;
                 String nome = field.getName();
                 String conteudo = field.getText();
-                String text = field.getToolTipText();
+                String tipText = field.getToolTipText();
                 int chave = field.getColumns();
                 try {
                     int numColumns = metaData.getColumnCount();
@@ -40,7 +41,7 @@ public class ValidaCampos extends ConexaoOracle {
                         String columnName = metaData.getColumnName(cont);
                         int obrigatorio = metaData.isNullable(cont);
                         if (nome.equals(columnName) && conteudo.equals("") && obrigatorio == 0 && chave != 1) {
-                            JOptionPane.showMessageDialog(null, "Campo " + text + " é obrigatório");
+                            JOptionPane.showMessageDialog(null, "Campo " + tipText + " é obrigatório");
                             field.grabFocus();
                             setRetorno(false);
                             return;
@@ -48,6 +49,35 @@ public class ValidaCampos extends ConexaoOracle {
                     }
                 } catch (SQLException SQLex) {
                     JOptionPane.showMessageDialog(null, SQLex);
+                }
+            }
+        }
+    }
+
+    public void validaInteiro(JFormattedTextField campo) {
+        long valor;
+        boolean valida;
+
+        if (!(campo.getText().equals(""))) {
+            String text = campo.getText();
+
+            if (text.indexOf('-') == 0) {
+                JOptionPane.showMessageDialog(null, "Esse campo só aceita números inteiros positivos ! ", "Informação", JOptionPane.INFORMATION_MESSAGE);
+                campo.setText("");
+                campo.grabFocus();
+                valida = false;
+                return;
+            } else {
+                valida = true;
+            }
+
+            if (valida) {
+                try {
+                    valor = Long.parseLong(campo.getText());
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Esse campo só aceita numeros !", "Informação ", JOptionPane.INFORMATION_MESSAGE);
+                    campo.setText("");
+                    campo.grabFocus();
                 }
             }
         }

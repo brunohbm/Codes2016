@@ -39,22 +39,23 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="jTabbedPane2" min="-2" pref="672" max="-2" attributes="0"/>
+              <Component id="jTPOS" min="-2" pref="672" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              <Component id="jTabbedPane2" min="-2" pref="513" max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jTPOS" min="-2" pref="513" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JTabbedPane" name="jTabbedPane2">
+    <Container class="javax.swing.JTabbedPane" name="jTPOS">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
@@ -173,50 +174,39 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jTFCodigoServico" min="-2" max="-2" attributes="0"/>
-                          <Component id="jBPesquisarServico" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                              <Component id="jBAddServico" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                              <Component id="jBTirarServico" max="32767" attributes="0"/>
-                          </Group>
                           <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                               <Component id="jTFServico" min="-2" max="-2" attributes="0"/>
                               <Component id="jTFServicoHora" min="-2" max="-2" attributes="0"/>
                               <Component id="jTFServicoValor" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jBAddServico" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jBTirarServico" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="jBPesquisarServico" alignment="0" min="-2" pref="42" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="81" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jTFCodigoPeca" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jBPesquisarPeca" alignment="0" max="32767" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jTFPeca" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTFQuantidadePeca" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTFValorPeca" alignment="1" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jBAddPeca" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jBRetirarPeca" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jBRetirarPeca" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jBAddPeca" max="32767" attributes="0"/>
+                          <Component id="jTFPeca" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jTFQuantidadePeca" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jTFValorPeca" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jTFCodigoPeca" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jBPesquisarPeca" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="81" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="683" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="760" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -245,16 +235,24 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTFCodigoCliente">
               <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="C&#xf3;digo Do Cliente"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="C&#xf3;d.Cliente"/>
                   </Border>
                 </Property>
+                <Property name="name" type="java.lang.String" value="CD_CLIENTE" noResource="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTFCodigoClienteFocusLost"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jBPesquisarCliente">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pesquisar"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Cursor em Forma de M&#xe3;o"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTFOperacao">
@@ -283,12 +281,17 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTFCodigoOperacao">
               <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="C&#xf3;digo da opera&#xe7;&#xe3;o"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Cod.Opera&#xe7;&#xe3;o"/>
                   </Border>
                 </Property>
+                <Property name="name" type="java.lang.String" value="CD_OPERACAO" noResource="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTFCodigoOperacaoFocusLost"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
@@ -297,21 +300,32 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTFCodigoServico">
               <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="C&#xf3;digo do servi&#xe7;o"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Cod.Servi&#xe7;o"/>
                   </Border>
                 </Property>
+                <Property name="name" type="java.lang.String" value="CD_SERVICO" noResource="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTFCodigoServicoFocusLost"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jBPesquisarOperacao">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pesquisar"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Cursor em Forma de M&#xe3;o"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="jBPesquisarServico">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pesquisar"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Cursor em Forma de M&#xe3;o"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBPesquisarServicoActionPerformed"/>
@@ -355,7 +369,16 @@
             </Component>
             <Component class="javax.swing.JButton" name="jBAddServico">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="18" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="+"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Cursor em Forma de M&#xe3;o"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBAddServicoActionPerformed"/>
@@ -363,7 +386,13 @@
             </Component>
             <Component class="javax.swing.JButton" name="jBTirarServico">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="18" style="1"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="-"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Cursor em Forma de M&#xe3;o"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBTirarServicoActionPerformed"/>
@@ -380,12 +409,12 @@
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="6" rowCount="0">
-                        <Column editable="true" title="Sal" type="java.lang.Object"/>
-                        <Column editable="true" title="Cod.Servi&#xe7;o" type="java.lang.Object"/>
-                        <Column editable="true" title="Servi&#xe7;o" type="java.lang.Object"/>
-                        <Column editable="true" title="Horas" type="java.lang.Object"/>
-                        <Column editable="true" title="Valor Hora" type="java.lang.Object"/>
-                        <Column editable="true" title="Total" type="java.lang.Object"/>
+                        <Column editable="false" title="Sel" type="java.lang.Boolean"/>
+                        <Column editable="false" title="Cod.Servi&#xe7;o" type="java.lang.Object"/>
+                        <Column editable="false" title="Servi&#xe7;o" type="java.lang.Object"/>
+                        <Column editable="false" title="Horas" type="java.lang.Object"/>
+                        <Column editable="false" title="Valor Hora" type="java.lang.Object"/>
+                        <Column editable="false" title="Total" type="java.lang.Object"/>
                       </Table>
                     </Property>
                   </Properties>
@@ -402,13 +431,14 @@
                 <Component class="javax.swing.JTable" name="jTPeca">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="6" rowCount="0">
-                        <Column editable="true" title="Sal" type="java.lang.Object"/>
-                        <Column editable="true" title="Servi&#xe7;o" type="java.lang.Object"/>
-                        <Column editable="true" title="Cod.Pe&#xe7;a" type="java.lang.Object"/>
-                        <Column editable="true" title="Valor Unitario" type="java.lang.Object"/>
-                        <Column editable="true" title="Quantidade" type="java.lang.Object"/>
-                        <Column editable="true" title="Total" type="java.lang.Object"/>
+                      <Table columnCount="7" rowCount="0">
+                        <Column editable="false" title="Sel" type="java.lang.Boolean"/>
+                        <Column editable="false" title="Servi&#xe7;o" type="java.lang.Object"/>
+                        <Column editable="false" title="Cod.Pe&#xe7;a" type="java.lang.Object"/>
+                        <Column editable="false" title="Desc.Pe&#xe7;a" type="java.lang.Object"/>
+                        <Column editable="false" title="Valor Unitario" type="java.lang.Object"/>
+                        <Column editable="false" title="Quantidade" type="java.lang.Object"/>
+                        <Column editable="false" title="Total" type="java.lang.Object"/>
                       </Table>
                     </Property>
                   </Properties>
@@ -417,16 +447,24 @@
             </Container>
             <Component class="javax.swing.JTextField" name="jTFCodigoPeca">
               <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="C&#xf3;digo da pe&#xe7;a"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Cod.Pe&#xe7;a"/>
                   </Border>
                 </Property>
+                <Property name="name" type="java.lang.String" value="CD_PRODUTO" noResource="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTFCodigoPecaFocusLost"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jBPesquisarPeca">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pesquisar"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Cursor em Forma de M&#xe3;o"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBPesquisarPecaActionPerformed"/>
@@ -470,7 +508,13 @@
             </Component>
             <Component class="javax.swing.JButton" name="jBAddPeca">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="18" style="1"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="+"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Cursor em Forma de M&#xe3;o"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBAddPecaActionPerformed"/>
@@ -478,7 +522,13 @@
             </Component>
             <Component class="javax.swing.JButton" name="jBRetirarPeca">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="18" style="1"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="-"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Cursor em Forma de M&#xe3;o"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBRetirarPecaActionPerformed"/>
@@ -507,18 +557,25 @@
                           <Component id="jBCancelar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="jBImprimir" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jBNovo" alignment="1" max="32767" attributes="0"/>
-                      <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                          <Component id="jBGravar" alignment="3" max="32767" attributes="0"/>
-                          <Component id="jBImprimir" alignment="3" max="32767" attributes="0"/>
-                          <Component id="jBCancelar" alignment="3" max="32767" attributes="0"/>
-                          <Component id="jBExcluir" alignment="3" max="32767" attributes="0"/>
-                          <Component id="jBAlterar" alignment="3" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jBNovo" alignment="1" max="32767" attributes="0"/>
+                              <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                                  <Component id="jBGravar" alignment="3" max="32767" attributes="0"/>
+                                  <Component id="jBImprimir" alignment="3" max="32767" attributes="0"/>
+                                  <Component id="jBCancelar" alignment="3" max="32767" attributes="0"/>
+                                  <Component id="jBExcluir" alignment="3" max="32767" attributes="0"/>
+                                  <Component id="jBAlterar" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -527,6 +584,9 @@
                 <Component class="javax.swing.JButton" name="jBNovo">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Novo"/>
+                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                      <Color id="Cursor em Forma de M&#xe3;o"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBNovoActionPerformed"/>
@@ -535,6 +595,9 @@
                 <Component class="javax.swing.JButton" name="jBAlterar">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Alterar"/>
+                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                      <Color id="Cursor em Forma de M&#xe3;o"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBAlterarActionPerformed"/>
@@ -543,6 +606,9 @@
                 <Component class="javax.swing.JButton" name="jBExcluir">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Excluir"/>
+                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                      <Color id="Cursor em Forma de M&#xe3;o"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBExcluirActionPerformed"/>
@@ -551,6 +617,9 @@
                 <Component class="javax.swing.JButton" name="jBCancelar">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Cancelar"/>
+                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                      <Color id="Cursor em Forma de M&#xe3;o"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBCancelarActionPerformed"/>
@@ -559,6 +628,9 @@
                 <Component class="javax.swing.JButton" name="jBGravar">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Gravar"/>
+                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                      <Color id="Cursor em Forma de M&#xe3;o"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBGravarActionPerformed"/>
@@ -567,6 +639,9 @@
                 <Component class="javax.swing.JButton" name="jBImprimir">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Imprimir"/>
+                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                      <Color id="Cursor em Forma de M&#xe3;o"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBImprimirActionPerformed"/>

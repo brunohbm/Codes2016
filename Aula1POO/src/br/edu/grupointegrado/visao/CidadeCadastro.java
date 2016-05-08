@@ -42,8 +42,6 @@ public class CidadeCadastro extends javax.swing.JFrame {
 
         jTPCidade = new javax.swing.JTabbedPane();
         jPCadastro = new javax.swing.JPanel();
-        jTFCodigo = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         jTFCidade = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -58,6 +56,7 @@ public class CidadeCadastro extends javax.swing.JFrame {
         JBPesquisaEstado = new javax.swing.JButton();
         jTFData = new javax.swing.JTextField();
         jBCarregar = new javax.swing.JButton();
+        jTFCodigo = new javax.swing.JFormattedTextField();
         jPConsulta = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTConsulta = new javax.swing.JTable();
@@ -74,10 +73,6 @@ public class CidadeCadastro extends javax.swing.JFrame {
                 jTPCidadeStateChanged(evt);
             }
         });
-
-        jTFCodigo.setColumns(1);
-
-        jLabel1.setText("Código");
 
         jTFCidade.setToolTipText("Descrição da cidade");
         jTFCidade.setName("DS_CIDADE"); // NOI18N
@@ -141,6 +136,13 @@ public class CidadeCadastro extends javax.swing.JFrame {
 
         jBCarregar.setText("Carregar");
 
+        jTFCodigo.setBorder(javax.swing.BorderFactory.createTitledBorder("Código"));
+        jTFCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFCodigoKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPCadastroLayout = new javax.swing.GroupLayout(jPCadastro);
         jPCadastro.setLayout(jPCadastroLayout);
         jPCadastroLayout.setHorizontalGroup(
@@ -150,10 +152,6 @@ public class CidadeCadastro extends javax.swing.JFrame {
                     .addGroup(jPCadastroLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTFCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jTFCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPCadastroLayout.createSequentialGroup()
                                 .addGroup(jPCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
@@ -168,7 +166,12 @@ public class CidadeCadastro extends javax.swing.JFrame {
                                         .addGap(63, 63, 63)
                                         .addComponent(jTFData, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jBCarregar))))))
+                                        .addComponent(jBCarregar))))
+                            .addGroup(jPCadastroLayout.createSequentialGroup()
+                                .addGroup(jPCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jTFCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPCadastroLayout.createSequentialGroup()
                         .addGap(123, 123, 123)
                         .addComponent(jBTAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -179,6 +182,10 @@ public class CidadeCadastro extends javax.swing.JFrame {
                         .addGap(42, 42, 42)
                         .addComponent(jBTCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(51, 51, 51))
+            .addGroup(jPCadastroLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTFCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPCadastroLayout.createSequentialGroup()
                     .addGap(20, 20, 20)
@@ -188,11 +195,9 @@ public class CidadeCadastro extends javax.swing.JFrame {
         jPCadastroLayout.setVerticalGroup(
             jPCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPCadastroLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(22, 22, 22)
                 .addComponent(jTFCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTFCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -207,7 +212,7 @@ public class CidadeCadastro extends javax.swing.JFrame {
                     .addComponent(JBPesquisaEstado)
                     .addComponent(jTFData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBCarregar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(jPCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jBTCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                     .addComponent(jBTExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
@@ -430,6 +435,10 @@ public class CidadeCadastro extends javax.swing.JFrame {
         ClassRelatorioCidade relatorio = new ClassRelatorioCidade(cidade.consultaGeral());
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jTFCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFCodigoKeyReleased
+        validaCampos.validaInteiro(jTFCodigo);
+    }//GEN-LAST:event_jTFCodigoKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -479,7 +488,6 @@ public class CidadeCadastro extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jCbTipo;
     private javax.swing.JLabel jLCidade;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPCadastro;
@@ -487,7 +495,7 @@ public class CidadeCadastro extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTConsulta;
     private javax.swing.JTextField jTFCidade;
-    private javax.swing.JTextField jTFCodigo;
+    private javax.swing.JFormattedTextField jTFCodigo;
     private javax.swing.JTextField jTFConsulta;
     private javax.swing.JTextField jTFData;
     private javax.swing.JTabbedPane jTPCidade;

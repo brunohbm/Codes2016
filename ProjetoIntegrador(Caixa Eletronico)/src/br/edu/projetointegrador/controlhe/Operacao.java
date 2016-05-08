@@ -23,21 +23,18 @@ public class Operacao extends Statement {
     private String dtOperacao;
     private String hrOperacao;
     private double vlOperacao;
-    private String dsObservacao;
     
     public void cadastrar() {
-        Date data = new Date();
-        super.registrar(dtOperacao, new Object[]{
+        super.registrar("OPERACAO", new Object[]{
             super.autoIncrem("OPERACAO", "CD_OPERACAO"),
             getContaFavorecida().getCdConta(),
             getConta().getCdConta(),
             tipoOperacao.getCdTipoOperacao(),
             agencia.getBanco().getCdBanco(),
             agencia.getCdAgencia(),
-            data,
-            data.getTime(),
+            "22/03/2015",
+            "06/05/16 01:33:03,000000000",
             getVlOperacao(),
-            getDsObservacao()
         }
         );
     }
@@ -104,14 +101,6 @@ public class Operacao extends Statement {
 
     public void setVlOperacao(double vlOperacao) {
         this.vlOperacao = vlOperacao;
-    }
-
-    public String getDsObservacao() {
-        return dsObservacao;
-    }
-
-    public void setDsObservacao(String dsObservacao) {
-        this.dsObservacao = dsObservacao;
     }
 
 }

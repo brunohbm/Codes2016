@@ -5,17 +5,21 @@
  */
 package br.edu.grupointegrado.visao;
 
+import br.edu.grupointegrado.ferramentas.RetornaCampo;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author CrasyFox
  */
 public class ProjetoPOO extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ProjetoPOO
-     */
+    RetornaCampo retornaCampo = new RetornaCampo();
+
     public ProjetoPOO() {
         initComponents();
+
     }
 
     /**
@@ -29,7 +33,7 @@ public class ProjetoPOO extends javax.swing.JFrame {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jBPesquisarOperacao4 = new javax.swing.JButton();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
+        jTPOS = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jTFCodOS = new javax.swing.JTextField();
         jTFDataOS = new javax.swing.JTextField();
@@ -98,9 +102,17 @@ public class ProjetoPOO extends javax.swing.JFrame {
             }
         });
 
+        jTFCodigoCliente.setToolTipText("Código Do Cliente");
         jTFCodigoCliente.setBorder(javax.swing.BorderFactory.createTitledBorder("Cód.Cliente"));
+        jTFCodigoCliente.setName("CD_CLIENTE"); // NOI18N
+        jTFCodigoCliente.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTFCodigoClienteFocusLost(evt);
+            }
+        });
 
         jBPesquisarCliente.setText("Pesquisar");
+        jBPesquisarCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jTFOperacao.setBorder(javax.swing.BorderFactory.createTitledBorder("Operação"));
         jTFOperacao.addActionListener(new java.awt.event.ActionListener() {
@@ -116,15 +128,31 @@ public class ProjetoPOO extends javax.swing.JFrame {
             }
         });
 
+        jTFCodigoOperacao.setToolTipText("Código da operação");
         jTFCodigoOperacao.setBorder(javax.swing.BorderFactory.createTitledBorder("Cod.Operação"));
+        jTFCodigoOperacao.setName("CD_OPERACAO"); // NOI18N
+        jTFCodigoOperacao.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTFCodigoOperacaoFocusLost(evt);
+            }
+        });
 
         jLabel1.setText("Seviços--------------------------------------------------------------------------------------------------------------------------------------------------------");
 
+        jTFCodigoServico.setToolTipText("Código do serviço");
         jTFCodigoServico.setBorder(javax.swing.BorderFactory.createTitledBorder("Cod.Serviço"));
+        jTFCodigoServico.setName("CD_SERVICO"); // NOI18N
+        jTFCodigoServico.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTFCodigoServicoFocusLost(evt);
+            }
+        });
 
         jBPesquisarOperacao.setText("Pesquisar");
+        jBPesquisarOperacao.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jBPesquisarServico.setText("Pesquisar");
+        jBPesquisarServico.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBPesquisarServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBPesquisarServicoActionPerformed(evt);
@@ -152,14 +180,19 @@ public class ProjetoPOO extends javax.swing.JFrame {
             }
         });
 
+        jBAddServico.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jBAddServico.setForeground(new java.awt.Color(255, 255, 255));
         jBAddServico.setText("+");
+        jBAddServico.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBAddServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBAddServicoActionPerformed(evt);
             }
         });
 
+        jBTirarServico.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jBTirarServico.setText("-");
+        jBTirarServico.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBTirarServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBTirarServicoActionPerformed(evt);
@@ -171,9 +204,24 @@ public class ProjetoPOO extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Sal", "Cod.Serviço", "Serviço", "Horas", "Valor Hora", "Total"
+                "Sel", "Cod.Serviço", "Serviço", "Horas", "Valor Hora", "Total"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTServico);
 
         jTPeca.setModel(new javax.swing.table.DefaultTableModel(
@@ -181,14 +229,37 @@ public class ProjetoPOO extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Sal", "Serviço", "Cod.Peça", "Valor Unitario", "Quantidade", "Total"
+                "Sel", "Serviço", "Cod.Peça", "Desc.Peça", "Valor Unitario", "Quantidade", "Total"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(jTPeca);
 
+        jTFCodigoPeca.setToolTipText("Código da peça");
         jTFCodigoPeca.setBorder(javax.swing.BorderFactory.createTitledBorder("Cod.Peça"));
+        jTFCodigoPeca.setName("CD_PRODUTO"); // NOI18N
+        jTFCodigoPeca.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTFCodigoPecaFocusLost(evt);
+            }
+        });
 
         jBPesquisarPeca.setText("Pesquisar");
+        jBPesquisarPeca.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBPesquisarPeca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBPesquisarPecaActionPerformed(evt);
@@ -216,14 +287,18 @@ public class ProjetoPOO extends javax.swing.JFrame {
             }
         });
 
+        jBAddPeca.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jBAddPeca.setText("+");
+        jBAddPeca.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBAddPeca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBAddPecaActionPerformed(evt);
             }
         });
 
+        jBRetirarPeca.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jBRetirarPeca.setText("-");
+        jBRetirarPeca.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBRetirarPeca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBRetirarPecaActionPerformed(evt);
@@ -233,6 +308,7 @@ public class ProjetoPOO extends javax.swing.JFrame {
         jLabel2.setText("Peças-----------------------------------------------------------------------------------------------------------------------------------------------------------");
 
         jBNovo.setText("Novo");
+        jBNovo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBNovoActionPerformed(evt);
@@ -240,6 +316,7 @@ public class ProjetoPOO extends javax.swing.JFrame {
         });
 
         jBAlterar.setText("Alterar");
+        jBAlterar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBAlterarActionPerformed(evt);
@@ -247,6 +324,7 @@ public class ProjetoPOO extends javax.swing.JFrame {
         });
 
         jBExcluir.setText("Excluir");
+        jBExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBExcluirActionPerformed(evt);
@@ -254,6 +332,7 @@ public class ProjetoPOO extends javax.swing.JFrame {
         });
 
         jBCancelar.setText("Cancelar");
+        jBCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBCancelarActionPerformed(evt);
@@ -261,6 +340,7 @@ public class ProjetoPOO extends javax.swing.JFrame {
         });
 
         jBGravar.setText("Gravar");
+        jBGravar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBGravar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBGravarActionPerformed(evt);
@@ -268,6 +348,7 @@ public class ProjetoPOO extends javax.swing.JFrame {
         });
 
         jBImprimir.setText("Imprimir");
+        jBImprimir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBImprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBImprimirActionPerformed(evt);
@@ -290,17 +371,22 @@ public class ProjetoPOO extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addComponent(jBCancelar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBImprimir))
+                .addComponent(jBImprimir)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jBNovo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jBGravar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBNovo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jBGravar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBAlterar)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -386,44 +472,37 @@ public class ProjetoPOO extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTFCodigoServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBPesquisarServico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jBAddServico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jBTirarServico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jTFServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTFServicoHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTFServicoValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTFServicoValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jBAddServico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jBTirarServico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jBPesquisarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTFCodigoPeca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBPesquisarPeca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTFPeca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTFQuantidadePeca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTFValorPeca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jBAddPeca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jBRetirarPeca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jBRetirarPeca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBAddPeca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTFPeca)
+                    .addComponent(jTFQuantidadePeca)
+                    .addComponent(jTFValorPeca)
+                    .addComponent(jTFCodigoPeca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBPesquisarPeca, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(683, 683, 683))
+                .addGap(760, 760, 760))
         );
 
-        jTabbedPane2.addTab("Ordem de Serviço", jPanel1);
+        jTPOS.addTab("Ordem de Serviço", jPanel1);
 
         jCBTipoConsulta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Geral", "Cliente", "Operação", "Data" }));
 
@@ -492,7 +571,7 @@ public class ProjetoPOO extends javax.swing.JFrame {
                 .addContainerGap(7, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Consulta", jPanel2);
+        jTPOS.addTab("Consulta", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -500,14 +579,15 @@ public class ProjetoPOO extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTPOS, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTPOS, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -546,7 +626,7 @@ public class ProjetoPOO extends javax.swing.JFrame {
     }//GEN-LAST:event_jBPesquisarOperacao4ActionPerformed
 
     private void jBAddServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAddServicoActionPerformed
-        // TODO add your handling code here:
+        incluirServico();
     }//GEN-LAST:event_jBAddServicoActionPerformed
 
     private void jBTirarServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTirarServicoActionPerformed
@@ -601,9 +681,22 @@ public class ProjetoPOO extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jBImprimirActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jTFCodigoServicoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFCodigoServicoFocusLost
+        jTFServico.setText(retornaCampo.retornaCampo("CAD_SERVICO", "DS_SERVICO", jTFCodigoServico));
+    }//GEN-LAST:event_jTFCodigoServicoFocusLost
+
+    private void jTFCodigoClienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFCodigoClienteFocusLost
+        jTFCliente.setText(retornaCampo.retornaCampo("CAD_CLIENTE", "DS_CLIENTE", jTFCodigoCliente));
+    }//GEN-LAST:event_jTFCodigoClienteFocusLost
+
+    private void jTFCodigoOperacaoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFCodigoOperacaoFocusLost
+        jTFOperacao.setText(retornaCampo.retornaCampo("CAD_OPERACAO", "DS_OPERACAO", jTFCodigoOperacao));
+    }//GEN-LAST:event_jTFCodigoOperacaoFocusLost
+
+    private void jTFCodigoPecaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFCodigoPecaFocusLost
+        jTFPeca.setText(retornaCampo.retornaCampo("PRODUTO", "DS_PRODUTO", jTFCodigoPeca));
+    }//GEN-LAST:event_jTFCodigoPecaFocusLost
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -680,11 +773,141 @@ public class ProjetoPOO extends javax.swing.JFrame {
     private javax.swing.JTextField jTFServicoValor;
     private javax.swing.JTextField jTFValorPeca;
     private javax.swing.JTable jTOrdemServico;
+    private javax.swing.JTabbedPane jTPOS;
     private javax.swing.JTable jTPeca;
     private javax.swing.JTable jTPecaConsulta;
     private javax.swing.JTable jTServico;
     private javax.swing.JTable jTServicoConsulta;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
     // End of variables declaration//GEN-END:variables
+
+    public void incluirPecas() {
+        DefaultTableModel tabelaPeca = (DefaultTableModel) jTPeca.getModel();
+        double soma = 0;
+        int totalLinha = tabelaPeca.getRowCount();
+        boolean situacao = false;
+        int conta = 0;
+        int index = 0;
+
+        for (int cont = 1; cont <= totalLinha; cont++) {
+            String cdServico = (String) tabelaPeca.getValueAt(cont, 1);
+            if (jTFCodigoPeca.getText().equals(cdServico)) {
+                int opcaoEscolhida = JOptionPane.showConfirmDialog(null, "Serviço já cadastrado deseja alterar horas e valor ", "Alteração", JOptionPane.YES_NO_OPTION);
+                if (opcaoEscolhida == JOptionPane.YES_OPTION) {
+                    situacao = true;
+                    index = conta;
+                } else {
+                    return;
+                }
+            }
+            conta++;
+        }
+        int x = tabelaPeca.getRowCount();
+        if (!(situacao)) {
+            tabelaPeca.setNumRows(x + 1);
+            tabelaPeca.setValueAt((false), x, 0);
+            String codigo = (String) jTServico.getValueAt(jTServico.getSelectedRow(), 1);
+            tabelaPeca.setValueAt(codigo, x, 1);
+            tabelaPeca.setValueAt(jTFCodigoPeca, x, 2);
+            tabelaPeca.setValueAt(jTFPeca, x, 3);
+            tabelaPeca.setValueAt(jTFValorPeca, x, 4);
+            tabelaPeca.setValueAt(jTFQuantidadePeca, x, 5);
+            double valor = (Double.parseDouble(jTFValorPeca.getText().replaceAll(",", ".")) * Double.parseDouble(jTFQuantidadePeca.getText().replaceAll(",", ".")));
+            tabelaPeca.setValueAt(valor, index, 6);
+
+            jTFCodigoPeca.setText("");
+            jTFPeca.setText("");
+            jTFValorPeca.setText("");
+            jTFQuantidadePeca.setText("");
+
+        } else {
+
+            tabelaPeca.setValueAt(jTFValorPeca, x, 4);
+            tabelaPeca.setValueAt(jTFQuantidadePeca, x, 5);
+            double valor = (Double.parseDouble(jTFValorPeca.getText().replaceAll(",", ".")) * Double.parseDouble(jTFQuantidadePeca.getText().replaceAll(",", ".")));
+            tabelaPeca.setValueAt(valor, index, 6);
+
+            jTFCodigoPeca.setText("");
+            jTFPeca.setText("");
+            jTFValorPeca.setText("");
+            jTFQuantidadePeca.setText("");
+        }
+    }
+    
+    public void excluirServico() {
+        DefaultTableModel tabelaServico = (DefaultTableModel) jTServico.getModel();
+        int totalLinha = jTServico.getRowCount();
+        int cont = 0;
+        boolean selec = false;
+
+        int opcao = JOptionPane.showConfirmDialog(null, "Deseja remover os serviços selecionados ? ", "Remover", JOptionPane.YES_NO_OPTION);
+        if (opcao == JOptionPane.YES_NO_OPTION){
+            for (cont = totalLinha - 1; cont >= 0; cont--){
+                boolean selecionado = (Boolean) jTServico.getValueAt(cont, 0);
+                if (selecionado){
+                    selec = true;
+                    tabelaServico.removeRow(cont);
+                }
+            }
+            if( ! (selec)){
+                JOptionPane.showMessageDialog(null, "Não ha registros selecionados");
+            }
+        }
+        
+    }
+
+    public void incluirServico() {
+        DefaultTableModel tabelaServico = (DefaultTableModel) jTServico.getModel();
+        double soma = 0;
+        int totalLinha = tabelaServico.getRowCount();
+        boolean situacao = false;
+        int conta = 0;
+        int index = 0;
+
+        for (int cont = 0; cont < totalLinha; cont++) {
+            String cdServico = (String) tabelaServico.getValueAt(cont, 1);
+            if (jTFCodigoServico.getText().equals(cdServico)) {
+                int opcaoEscolhida = JOptionPane.showConfirmDialog(null, "Serviço já cadastrado deseja alterar horas e valor ", "Alteração", JOptionPane.YES_NO_OPTION);
+                if (opcaoEscolhida == JOptionPane.YES_OPTION) {
+                    situacao = true;
+                    index = conta;
+                } else {
+                    return;
+                }
+            }
+            conta++;
+        }
+        int x = tabelaServico.getRowCount();
+        if (!(situacao)) {
+            tabelaServico.setNumRows(x + 1);
+            tabelaServico.setValueAt((false), x, 0);
+            tabelaServico.setValueAt(jTFCodigoServico.getText(), x, 1);
+            tabelaServico.setValueAt(jTFServico.getText(), x, 2);
+            tabelaServico.setValueAt(jTFServicoHora.getText(), index, 3);
+            tabelaServico.setValueAt(jTFServicoValor.getText(), index, 4);
+            double valor = (Double.parseDouble(jTFServicoHora.getText().replaceAll(",", ".")) * Double.parseDouble(jTFServicoValor.getText().replaceAll(",", ".")));
+            tabelaServico.setValueAt(valor, index, 5);
+
+            jTFCodigoServico.setText("");
+            jTFServico.setText("");
+            jTFServicoHora.setText("");
+            jTFServicoValor.setText("");
+        } else {
+
+            tabelaServico.setValueAt(jTFServicoHora.getText(), index, 3);
+            tabelaServico.setValueAt(jTFServicoValor.getText(), index, 4);
+            double valor = (Double.parseDouble(jTFServicoHora.getText().replaceAll(",", ".")) * Double.parseDouble(jTFServicoValor.getText().replaceAll(",", ".")));
+            tabelaServico.setValueAt(valor, index, 5);
+
+            jTFCodigoServico.setText("");
+            jTFServico.setText("");
+            jTFServicoHora.setText("");
+            jTFServicoValor.setText("");
+            jTFCodigoServico.grabFocus();
+        }
+    }
 }
+
+    
+
+

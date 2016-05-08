@@ -40,11 +40,11 @@ public class Statement extends ConexaoOracle {
     }
 
     public void alterar(String tabela, Object valores[], String colunaChave, int chave) {
-        try {            
+        try {
             sql.delete(0, sql.length());
             sql.append("SELECT * FROM ").append(tabela);
             executeSQL(sql.toString());
-            sql.delete(0, sql.length());            
+            sql.delete(0, sql.length());
             sql.append("UPDATE ");
             sql.append(tabela);
             sql.append(" SET ");
@@ -53,11 +53,11 @@ public class Statement extends ConexaoOracle {
                     sql.append(metaData.getColumnName(cont)).append(" = ?,");
                 }
             }
-            sql.delete((sql.length() - 1), sql.length());           
+            sql.delete((sql.length() - 1), sql.length());
             sql.append(" WHERE ");
             sql.append(colunaChave);
             sql.append(" = ").append(chave);
-            
+
             PreparedStatement stmt = ConexaoOracle.prepareStatement(sql.toString());
             for (int cont = 0; cont < valores.length; cont++) {
                 if (valores[cont] instanceof String) {
@@ -98,8 +98,11 @@ public class Statement extends ConexaoOracle {
                     stmt.setString((cont + 1), dateFormat.format(valores[cont]));
                 } else if (valores[cont] instanceof Time) {
                     stmt.setString((cont + 1), horaFormat.format(valores[cont]));
+                } else if (valores[cont] instanceof Double) {
+                    stmt.setDouble((cont + 1), Double.parseDouble(valores[cont].toString()));
                 }
             }
+            System.out.println(stmt.toString());
             stmt.execute();
             stmt.close();
         } catch (SQLException SQLex) {

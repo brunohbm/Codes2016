@@ -5,6 +5,7 @@
  */
 package br.test.projectdelivery.tools;
 
+import br.test.projectdelivery.connection.ConnectionOracle;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -12,6 +13,7 @@ import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.plaf.ComboBoxUI;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author CrasyFox
  */
-public class FillJTable {
+public class FillJTable extends ConnectionOracle {
 
     public void fillJTableColumn(JTable tableModel, ResultSet resultSet, String[] columns) {
         DefaultTableModel table = (DefaultTableModel) tableModel.getModel();
@@ -40,7 +42,7 @@ public class FillJTable {
             JOptionPane.showMessageDialog(null, "Error list JTable");
         }
     }
-    
+
     public void fillJTable(JTable tableModel, ResultSet resultSet) {
         DefaultTableModel table = (DefaultTableModel) tableModel.getModel();
         table.setNumRows(0);
@@ -115,15 +117,19 @@ public class FillJTable {
         }
         return vector;
     }
-    
-    public String getTextColumn(ResultSet resultSet, String column){
-        String getColumn = null;
-        try {
-            resultSet.first();
-            getColumn = resultSet.getString(column);
-        } catch (SQLException ex) {
-            System.out.println("Has no records in the table");
+
+    public String getTextColumn(String table, String returnColumn, JTextField keyField) {
+        if (!(keyField.getText().equals(""))) {
+            runSQL("SELECT " + returnColumn + " FROM " + table + " WHERE " + keyField.getName() + " = " + keyField.getText());
+            try {
+                resultSet.first();
+                return resultSet.getString(returnColumn);
+            } catch (SQLException exSQL) {
+                JOptionPane.showMessageDialog(null, "There is no values ​​identified for this value");
+                keyField.grabFocus();
+                keyField.setText("");
+            }
         }
-        return getColumn;
+        return "";
     }
 }

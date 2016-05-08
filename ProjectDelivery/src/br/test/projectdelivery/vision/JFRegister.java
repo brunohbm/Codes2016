@@ -649,7 +649,11 @@ public class JFRegister extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jBFillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFillActionPerformed
-        client.setCdClient(Integer.parseInt(jTFClientCode.getText()));
+        ClientQuery dialog = new ClientQuery(this, true, client);
+        dialog.setVisible(true);
+        dialog.addWindowListener(
+        new java.awt.event.WindowAdapter() {
+        public void windownClosed(java.awt.event.WindowEvent evt){
             jTFClientName.setText(fillJTable.getTextColumn(client.queryCdClient(), "NM_CLIENT"));
             jTFClientAddress.setText(fillJTable.getTextColumn(client.queryCdClient(), "DS_ADDRESS"));
             jTFClientComplement.setText(fillJTable.getTextColumn(client.queryCdClient(), "DS_COMPLEMENT"));
@@ -658,8 +662,10 @@ public class JFRegister extends javax.swing.JFrame {
             jCBClientUF.setSelectedItem(fillJTable.getTextColumn(client.queryCdClient(), "DS_UF"));
             city.setDsUF(jCBClientUF.getSelectedItem().toString());
             fillJTable.fillJcombo(city.queryUF(), jCBClientCity, "DS_CITY");
-            jCBClientCity.setSelectedItem(fillJTable.getTextColumn(client.queryCdClient(), "DS_CITY"));
-        
+            jCBClientCity.setSelectedItem(fillJTable.getTextColumn(client.queryCdClient(), "DS_CITY"));  
+        }
+        }
+        );
     }//GEN-LAST:event_jBFillActionPerformed
 
     private void jBDeleteClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDeleteClientActionPerformed

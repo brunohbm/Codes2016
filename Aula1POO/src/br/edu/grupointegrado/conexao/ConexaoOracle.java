@@ -28,6 +28,7 @@ public class ConexaoOracle {
                 Class.forName("oracle.jdbc.driver.OracleDriver");
                 ConexaoOracle = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:XE", "aulapoo", "aulapoo");
                 System.out.println("Conectado !");
+                ConexaoOracle.setAutoCommit(false);
                 return ConexaoOracle;
             } catch (ClassNotFoundException ex) {
                 JOptionPane.showMessageDialog(null, "Driver não encontrado !" + ex);
@@ -38,6 +39,22 @@ public class ConexaoOracle {
                 ex.printStackTrace();
                 return null;
             }
+        }
+    }
+
+    public void commit() {
+        try {
+            conecta().commit();
+        } catch (SQLException exSQL) {
+            JOptionPane.showMessageDialog(null, "Problemas ao realizar o commit");
+        }
+    }
+
+    public void rollback() {
+        try {
+            conecta().rollback();
+        } catch (SQLException exSQL) {
+            JOptionPane.showMessageDialog(null, "Problemas ao realizar o rollback");
         }
     }
 
@@ -52,7 +69,7 @@ public class ConexaoOracle {
         try {
             metaData = resultSet.getMetaData();
         } catch (SQLException erro) {
-            System.out.println("erro ao pegar o metada"  +  erro);
+            System.out.println("erro ao pegar o metada" + erro);
             erro.printStackTrace();
         }
 

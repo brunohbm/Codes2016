@@ -98,13 +98,13 @@ public class TelaSaque extends javax.swing.JFrame {
 
     private void jBConfirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfirmaActionPerformed
         if (operacao.getConta().getVlSaldo() > Double.parseDouble(jTFValor.getText())) {
-            if (operacao.getConta().getVlLimite()> Double.parseDouble(jTFValor.getText())){
+            if (operacao.getConta().getVlLimite() > Double.parseDouble(jTFValor.getText())){
                 operacao.getTipoOperacao().setCdTipoOperacao(Escolha.SAQUE);
                 operacao.getAgencia().setCdAgencia(1);
                 operacao.getAgencia().getBanco().setCdBanco(1);               
                 operacao.setVlOperacao(Double.parseDouble(jTFValor.getText()));                
                 operacao.getConta().updateSaldo( - Double.parseDouble(jTFValor.getText()));
-                operacao.cadastrar();
+                operacao.cadastrarSemContaFavorecida();
                 
                 TelaInicial tela = new TelaInicial();
                 tela.setVisible(true);

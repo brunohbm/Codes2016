@@ -5,16 +5,41 @@
  */
 package br.edu.grupointegrado.controle;
 
+import br.edu.grupointegrado.ferramentas.Statement;
+
 /**
  *
  * @author CrasyFox
  */
 public class OS {
 
-    int cdOS;
-    String dtOS;
-    Cliente cliente = new Cliente();
-    Operacao operacao = new Operacao();
+    private int cdOS;
+    private String dtOS;
+    private Cliente cliente = new Cliente();
+    private Operacao operacao = new Operacao();
+
+    public Statement stmt = new Statement();
+    
+    public void incluir() {
+        stmt.registrar("CAD_OS", new Object[]{
+            getCdOS(),
+            getDtOS(),
+            getCliente().getCdCliente(),
+            getOperacao().getCdOperacao()
+        });
+    }
+
+    public void excluir() {
+        stmt.excluir("CAD_OS", "CD_OS", getCdOS());
+    }
+
+    public void alterar() {
+        stmt.alterar("CAD_OS", new Object[]{
+            getDtOS(),
+            getCliente().getCdCliente(),
+            getOperacao().getCdOperacao()
+        }, "CD_OS", getCdOS());
+    }
 
     public int getCdOS() {
         return cdOS;
@@ -47,6 +72,5 @@ public class OS {
     public void setOperacao(Operacao operacao) {
         this.operacao = operacao;
     }
-    
-    
+
 }

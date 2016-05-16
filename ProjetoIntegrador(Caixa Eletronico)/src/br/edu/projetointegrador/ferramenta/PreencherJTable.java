@@ -16,6 +16,16 @@ import java.sql.SQLException;
 
 public class PreencherJTable {
 
+    public String getTextColumn(ResultSet resultSet, String column) {
+        try {
+            resultSet.first();
+            return resultSet.getString(column);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "error to get column" + column);
+            return "";
+        }
+    }
+
     public void preencherJtable(JTable tabela, ResultSet resultado) {
         DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
         modelo.setNumRows(0);
@@ -38,7 +48,6 @@ public class PreencherJTable {
             JOptionPane.showMessageDialog(null, "Erro ao listar no JTable " + erro);
         }
     }
-
 
     public int[] preencherComboRetorno(ResultSet resultSet, String colunaVisao, String primaria, JComboBox combo) {
         combo.removeAllItems();

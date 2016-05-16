@@ -33,7 +33,7 @@ public class Statement extends ConexaoOracle {
         sql.append(" = ");
         sql.append(chave);
         try {
-            deleteSQL(sql.toString());
+            deleteSQL(sql.toString());            
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
@@ -68,9 +68,11 @@ public class Statement extends ConexaoOracle {
                     stmt.setString((cont + 1), dateFormat.format(valores[cont]));
                 } else if (valores[cont] instanceof Time) {
                     stmt.setString((cont + 1), horaFormat.format(valores[cont]));
+                } else if (valores[cont] instanceof Double) {
+                    stmt.setDouble((cont + 1), Double.parseDouble(valores[cont].toString()));
                 }
             }
-            stmt.execute(); 
+            stmt.execute();             
             stmt.close();
         } catch (Exception e) {
         }
@@ -98,9 +100,11 @@ public class Statement extends ConexaoOracle {
                     stmt.setString((cont + 1), dateFormat.format(valores[cont]));
                 } else if (valores[cont] instanceof Time) {
                     stmt.setString((cont + 1), horaFormat.format(valores[cont]));
+                } else if (valores[cont] instanceof Double) {
+                    stmt.setDouble((cont + 1), Double.parseDouble(valores[cont].toString()));
                 }
             }
-            stmt.execute();
+            stmt.execute();            
             stmt.close();
         } catch (SQLException SQLex) {
             JOptionPane.showMessageDialog(null, SQLex);

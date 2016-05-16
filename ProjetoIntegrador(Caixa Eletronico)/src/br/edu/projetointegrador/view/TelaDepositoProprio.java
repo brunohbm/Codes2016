@@ -98,6 +98,7 @@ public class TelaDepositoProprio extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFValorActionPerformed
 
     private void jBConfirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfirmaActionPerformed
+        operacao.setVlOperacao(Double.parseDouble(jTFValor.getText().toString()));
         TelaDepositoPConfirmacao tela = new TelaDepositoPConfirmacao(operacao);
         tela.setVisible(true);
         this.dispose();

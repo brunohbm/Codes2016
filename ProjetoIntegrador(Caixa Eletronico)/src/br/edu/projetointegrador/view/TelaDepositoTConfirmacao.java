@@ -6,6 +6,8 @@
 package br.edu.projetointegrador.view;
 
 import br.edu.projetointegrador.controlhe.Operacao;
+import br.edu.projetointegrador.ferramenta.Escolha;
+import br.edu.projetointegrador.ferramenta.PreencherJTable;
 
 /**
  *
@@ -14,10 +16,14 @@ import br.edu.projetointegrador.controlhe.Operacao;
 public class TelaDepositoTConfirmacao extends javax.swing.JFrame {
 
     Operacao operacao = new Operacao();
+    PreencherJTable fill = new PreencherJTable();
     
-    public TelaDepositoTConfirmacao(Operacao operacao) {
+    public TelaDepositoTConfirmacao(Operacao operacao) {        
         this.operacao = operacao;
         initComponents();
+        jTFAgencia.setText(Integer.toString(operacao.getContaFavorecida().getAgencia().getCdAgencia()));
+        jTFCliente.setText(fill.getTextColumn(operacao.getContaFavorecida().getResultSet(), "NM_CLIENTE"));
+        jTFValor.setText(Double.toString(operacao.getVlOperacao()));
     }
 
     /**
@@ -158,7 +164,14 @@ public class TelaDepositoTConfirmacao extends javax.swing.JFrame {
     }//GEN-LAST:event_jBCancelarActionPerformed
 
     private void jBConfirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfirmaActionPerformed
-        
+        operacao.getTipoOperacao().setCdTipoOperacao(Escolha.DEPOSITO);
+        operacao.getAgencia().setCdAgencia(1);
+        operacao.getAgencia().getBanco().setCdBanco(1);
+        operacao.cadastrarComContaFavorecida();
+        operacao.getContaFavorecida().updateSaldo(operacao.getVlOperacao());
+        TelaOperacaoRealizada tela = new TelaOperacaoRealizada(operacao);
+        tela.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jBConfirmaActionPerformed
 
     /**

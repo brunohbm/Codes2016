@@ -6,6 +6,7 @@
 package br.edu.projetointegrador.controlhe;
 
 import br.edu.projetointegrador.conexao.ConexaoOracle;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -59,6 +60,36 @@ public class ContaCliente extends ConexaoOracle {
         }
     }
 
+    public static void main(String[] args) {
+        ContaCliente c = new ContaCliente();
+        c.getAgencia().setCdAgencia(1);
+        c.setCdConta(1);
+        c.testeContaDeposito();
+    }
+    
+    public boolean testeContaDeposito() {
+        try {
+            strBuff.delete(0, strBuff.length());
+            strBuff.append("SELECT C.NM_CLIENTE, CL.VL_SALDO FROM CONTA_CLIENTE CL ");
+            strBuff.append("INNER JOIN CLIENTE C ON C.CD_CLIENTE = CL.CD_CLIENTE ");
+            strBuff.append("WHERE CL.CD_CONTA = ").append(getCdConta());
+            strBuff.append(" AND CL.CD_AGENCIA = ").append(getAgencia().getCdAgencia());
+            executeSQL(strBuff.toString());
+            try {
+                resultSet.first();
+                setVlSaldo(resultSet.getDouble("VL_SALDO"));
+            } catch (Exception e) {
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public ResultSet getResultSet(){
+        return resultSet;
+    }
+    
     public int getNrSenha() {
         return nrSenha;
     }

@@ -6,6 +6,7 @@
 package br.edu.projetointegrador.view;
 
 import br.edu.projetointegrador.controlhe.Operacao;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,7 +15,7 @@ import br.edu.projetointegrador.controlhe.Operacao;
 public class TelaDepositoTerceiro extends javax.swing.JFrame {
 
     public Operacao operacao = new Operacao();
-    
+
     public TelaDepositoTerceiro(Operacao operacao) {
         this.operacao = operacao;
         initComponents();
@@ -132,9 +133,20 @@ public class TelaDepositoTerceiro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBConfirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfirmaActionPerformed
-        TelaDepositoTConfirmacao tela = new TelaDepositoTConfirmacao(operacao);
-        tela.setVisible(true);
-        this.dispose();
+        if (Double.parseDouble(jTFValor.getText()) <= 5000) {
+            operacao.getContaFavorecida().getAgencia().setCdAgencia(Integer.parseInt(jTFAgencia.getText()));
+            operacao.getContaFavorecida().setCdConta(Integer.parseInt(jTFConta.getText()));
+            if (operacao.getContaFavorecida().testeContaDeposito()) {
+                operacao.setVlOperacao(Double.parseDouble(jTFValor.getText()));
+                TelaDepositoTConfirmacao tela = new TelaDepositoTConfirmacao(operacao);
+                tela.setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Conta ou Agencia incorreta");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Valor Maximo 5000 $");
+        }
     }//GEN-LAST:event_jBConfirmaActionPerformed
 
     private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed

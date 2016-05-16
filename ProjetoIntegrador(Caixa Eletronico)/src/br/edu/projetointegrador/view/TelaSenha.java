@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  * @author CrasyFox
  */
 public class TelaSenha extends javax.swing.JFrame {
-    
+
     Operacao operacao = new Operacao();
 
     public TelaSenha(Operacao operacao) {
@@ -121,7 +121,7 @@ public class TelaSenha extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFSenhaActionPerformed
 
     private void jBConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfirmarActionPerformed
-       testarSenha(Integer.parseInt(jTFSenha.getText()), Integer.parseInt(jTFConta.getText()));
+        testarSenha(Integer.parseInt(jTFSenha.getText()), Integer.parseInt(jTFConta.getText()));
     }//GEN-LAST:event_jBConfirmarActionPerformed
 
     private void jTFContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFContaActionPerformed
@@ -134,10 +134,10 @@ public class TelaSenha extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jBCancelarActionPerformed
 
-/**
- * @param args the command line arguments
- */
-public static void main(String args[]) {
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -148,28 +148,24 @@ public static void main(String args[]) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                
 
-}
+                }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(TelaSenha.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (InstantiationException ex) {
+        } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(TelaSenha.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (IllegalAccessException ex) {
+        } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(TelaSenha.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(TelaSenha.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
     }
@@ -185,16 +181,17 @@ public static void main(String args[]) {
     // End of variables declaration//GEN-END:variables
 
     private void testarSenha(int senha, int conta) {
-        operacao.getConta().setCdConta(conta);
-        operacao.getConta().setNrSenha(senha);
-        operacao.getConta().preecher();
-       if(senha == operacao.getConta().getNrSenha() && conta == operacao.getConta().getCdConta()){
-           TelaMenu tela = new TelaMenu(true, operacao);
-           tela.setVisible(true);
-           this.dispose();
-       }else{
-        JOptionPane.showMessageDialog(null, "Senha incorreta digite novamente");
-        jTFSenha.setText("");
-    }
+        try {
+            operacao.getConta().setCdConta(conta);
+            operacao.getConta().setNrSenha(senha);
+            operacao.getConta().preecher();
+            TelaMenu tela = new TelaMenu(true, operacao);
+            tela.setVisible(true);
+            this.dispose();            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Senha ou conta incorreta digite novamente");
+            jTFSenha.setText("");
+        }
+
     }
 }

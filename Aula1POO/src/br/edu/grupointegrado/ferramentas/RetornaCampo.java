@@ -6,6 +6,7 @@
 package br.edu.grupointegrado.ferramentas;
 
 import br.edu.grupointegrado.conexao.ConexaoOracle;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -16,7 +17,7 @@ import javax.swing.JTextField;
  * @author CrasyFox
  */
 public class RetornaCampo extends ConexaoOracle {
-
+    
     public String retornaCampo(String tabela, String colunaRetorno, JTextField campo) {
         if (!(campo.getText().equals(""))) {
             executeSQL("SELECT " + colunaRetorno + " FROM " + tabela + " WHERE " + campo.getName() + " = " + campo.getText());

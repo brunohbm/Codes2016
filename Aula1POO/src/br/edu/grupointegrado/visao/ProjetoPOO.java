@@ -5,6 +5,9 @@
  */
 package br.edu.grupointegrado.visao;
 
+import br.edu.grupointegrado.controle.MovOsServico;
+import br.edu.grupointegrado.controle.MovOsServicoProduto;
+import br.edu.grupointegrado.controle.OS;
 import br.edu.grupointegrado.ferramentas.RetornaCampo;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -15,6 +18,10 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ProjetoPOO extends javax.swing.JFrame {
 
+    OS os = new OS();
+    MovOsServico movOsServico = new MovOsServico();
+    MovOsServicoProduto movProduto = new MovOsServicoProduto();
+    
     RetornaCampo retornaCampo = new RetornaCampo();
 
     public ProjetoPOO() {
@@ -781,6 +788,27 @@ public class ProjetoPOO extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 
+    public void gravarServico() {
+        for(int cont = 0; cont < jTServico.getRowCount(); cont++){
+            movOsServico.getOs().setCdOS(Integer.parseInt(jTFCodOS.getText()));
+            movOsServico.getServico().setCdServico(Integer.parseInt(jTServico.getValueAt(cont, 1).toString()));
+            movOsServico.setQtHoras(Double.parseDouble(jTServico.getValueAt(cont, 3).toString()));
+            movOsServico.setVlServico(Double.parseDouble(jTServico.getValueAt(cont, 4).toString()));
+            movOsServico.incluir();
+        }
+    }
+    
+    public void gravarServicoProduto() {
+        for (int cont = 0; cont < jTPeca.getRowCount(); cont++){
+            movProduto.getMovServico().getOs().setCdOS(Integer.parseInt(jTFCodOS.getText()));
+            movProduto.getMovServico().getServico().setCdServico(Integer.parseInt(jTFServico.getText()));
+            movProduto.getProduto().setCdProduto(Integer.parseInt(jTPeca.getValueAt(cont, 2).toString()));
+            movProduto.setVlProduto(Double.parseDouble(jTPeca.getValueAt(cont, 4).toString()));
+            movProduto.setQtProduto(Integer.parseInt(jTPeca.getValueAt(cont, 5).toString()));
+            movProduto.incluir();
+        }
+    }
+    
     public void incluirPecas() {
         DefaultTableModel tabelaPeca = (DefaultTableModel) jTPeca.getModel();
         double soma = 0;

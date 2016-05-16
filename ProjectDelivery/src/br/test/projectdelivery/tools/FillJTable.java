@@ -23,6 +23,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FillJTable extends ConnectionOracle {
 
+    
+    
     public void fillJTableColumn(JTable tableModel, ResultSet resultSet, String[] columns) {
         DefaultTableModel table = (DefaultTableModel) tableModel.getModel();
         table.setNumRows(0);
@@ -131,5 +133,15 @@ public class FillJTable extends ConnectionOracle {
             }
         }
         return "";
+    }
+    
+    public String getTextColumn(ResultSet resultSet, String column){
+        try {
+            resultSet.first();
+            return resultSet.getString(column);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "error to get column" + column);
+            return "";
+        }               
     }
 }

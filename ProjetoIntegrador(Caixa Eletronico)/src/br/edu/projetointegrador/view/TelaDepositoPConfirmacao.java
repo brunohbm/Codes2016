@@ -6,6 +6,8 @@
 package br.edu.projetointegrador.view;
 
 import br.edu.projetointegrador.controlhe.Operacao;
+import br.edu.projetointegrador.ferramenta.Escolha;
+import br.edu.projetointegrador.ferramenta.PreencherJTable;
 
 /**
  *
@@ -14,10 +16,14 @@ import br.edu.projetointegrador.controlhe.Operacao;
 public class TelaDepositoPConfirmacao extends javax.swing.JFrame {
 
     Operacao operacao = new Operacao();
-    
+    PreencherJTable preencher = new PreencherJTable();
+
     public TelaDepositoPConfirmacao(Operacao operacao) {
         this.operacao = operacao;
         initComponents();
+        jTFAgencia.setText(Integer.toString(operacao.getConta().getAgencia().getCdAgencia()));
+        jTFCliente.setText(preencher.getTextColumn(operacao.getConta().getCliente().consultaGeral(), "NM_CLIENTE"));
+        jTFValor.setText(Double.toString(operacao.getVlOperacao()));
     }
 
     /**
@@ -97,16 +103,16 @@ public class TelaDepositoPConfirmacao extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTFAgencia, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTFAgencia, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTFValor, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTFCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(84, 84, 84))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTFCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                            .addComponent(jTFValor))))
+                .addGap(66, 66, 66))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,7 +158,14 @@ public class TelaDepositoPConfirmacao extends javax.swing.JFrame {
     }//GEN-LAST:event_jBCancelarActionPerformed
 
     private void jBConfirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfirmaActionPerformed
-
+        operacao.getTipoOperacao().setCdTipoOperacao(Escolha.DEPOSITO);
+        operacao.getAgencia().setCdAgencia(1);
+        operacao.getAgencia().getBanco().setCdBanco(1);
+        operacao.cadastrarSemContaFavorecida();
+        operacao.getConta().updateSaldo(operacao.getVlOperacao());
+        TelaOperacaoRealizada tela = new TelaOperacaoRealizada(operacao);
+        tela.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jBConfirmaActionPerformed
 
     /**

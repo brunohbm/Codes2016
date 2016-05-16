@@ -36,10 +36,30 @@ public class ValidatesFields extends ConnectionOracle {
                 int key = field.getColumns();
                 try {
                     for (int cont = 1; cont <= metaData.getColumnCount(); cont++) {
-                        String columnName = metaData.getCatalogName(cont);
+                        String columnName = metaData.getColumnName(cont);
                         int testIsNull = metaData.isNullable(cont);
                         if (columnName.equals(name) && testIsNull == 0 && content.equals("") && key != 1) {
-                            JOptionPane.showMessageDialog(null, "O campo " + text + " é obrigatório");
+                            JOptionPane.showMessageDialog(null, "This fild " + text + " is required");
+                            field.grabFocus();
+                            setReturnTest(false);
+                            return;
+                        }
+                    }
+                } catch (SQLException exSQL) {
+                    JOptionPane.showMessageDialog(null, exSQL);
+                }
+            } else if (component instanceof JFormattedTextField) {
+                JFormattedTextField field = ((JFormattedTextField) component);
+                String name = field.getName();
+                String content = field.getText();
+                String text = field.getToolTipText();
+                int key = field.getColumns();
+                try {
+                    for (int cont = 1; cont <= metaData.getColumnCount(); cont++) {
+                        String columnName = metaData.getColumnName(cont);
+                        int testIsNull = metaData.isNullable(cont);
+                        if (columnName.equals(name) && testIsNull == 0 && content.equals("") && key != 1) {
+                            JOptionPane.showMessageDialog(null, "This fild " + text + " is required");
                             field.grabFocus();
                             setReturnTest(false);
                             return;
@@ -58,20 +78,20 @@ public class ValidatesFields extends ConnectionOracle {
             if (field.getText().indexOf("-") == 0) {
                 JOptionPane.showMessageDialog(null, "this field only accept values positives", "Report", JOptionPane.INFORMATION_MESSAGE);
                 field.setText("");
-                field.grabFocus();                
+                field.grabFocus();
             } else {
                 try {
                     long valueTest = Long.parseLong(field.getText());
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "this field only accept numbers", "Report", JOptionPane.INFORMATION_MESSAGE);
                     field.setText("");
-                    field.grabFocus();                    
+                    field.grabFocus();
                 }
             }
         }
     }
 
-    public boolean isReturnTest() {
+    public boolean getTest() {
         return returnTest;
     }
 

@@ -8,7 +8,9 @@ package br.test.projectdelivery.vision;
 import br.test.projectdelivery.control.ClassCity;
 import br.test.projectdelivery.control.ClassClient;
 import br.test.projectdelivery.control.ClassUF;
+import br.test.projectdelivery.tools.CleanField;
 import br.test.projectdelivery.tools.FillJTable;
+import br.test.projectdelivery.tools.ValidatesFields;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -21,6 +23,8 @@ public class JFRegister extends javax.swing.JFrame {
 
     ClassCity city = new ClassCity();
     FillJTable fillJTable = new FillJTable();
+    ValidatesFields validateField = new ValidatesFields();
+    CleanField cleanfield = new CleanField();    
     ClassUF uf = new ClassUF();
     ClassClient client = new ClassClient();
     int[] keys;
@@ -30,8 +34,7 @@ public class JFRegister extends javax.swing.JFrame {
      * 03/04/2016 Creates new form JFRegister
      */
     public JFRegister() {
-        initComponents();
-        fillJTable.alignTable(jTFindCity, new int[]{80, 200, 80});
+        initComponents();        
         fillJTable.alignTable(jTClientFind, new int[]{50, 400, 100, 100});
         fillJTable.fillJcombo(uf.queryGeneral(), jCBUF, "DS_UF");
         fillJTable.fillJcombo(uf.queryGeneral(), jCBClientUF, "DS_UF");
@@ -86,17 +89,18 @@ public class JFRegister extends javax.swing.JFrame {
         jCBOtherFind = new javax.swing.JComboBox<>();
         jCBTipFind = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
-        jTFCityCode = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jTFCityName = new javax.swing.JTextField();
         jBInclude = new javax.swing.JButton();
         jBAlter = new javax.swing.JButton();
         jBDelete = new javax.swing.JButton();
         jBCancelCity = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jPRegisterCity = new javax.swing.JPanel();
         jCBUF = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        jTFCityName = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jFTFCityCode = new javax.swing.JFormattedTextField();
         jPanel3 = new javax.swing.JPanel();
         jBFind = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -124,6 +128,11 @@ public class JFRegister extends javax.swing.JFrame {
                 jCBClientCityPopupMenuWillBecomeInvisible(evt);
             }
             public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
+        jCBClientCity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBClientCityActionPerformed(evt);
             }
         });
 
@@ -310,7 +319,7 @@ public class JFRegister extends javax.swing.JFrame {
                     .addComponent(jBAlterClient, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBDeleteClient, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBCancelClient, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
 
         jTPFindCity.addTab("Register Client", jPanel2);
@@ -396,28 +405,13 @@ public class JFRegister extends javax.swing.JFrame {
                         .addComponent(jCBOtherFind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(14, 14, 14)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
 
         jTPFindCity.addTab("Find Client", jPanel4);
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
         jPanel1.setForeground(new java.awt.Color(0, 0, 0));
-
-        jTFCityCode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFCityCodeActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jLabel1.setText("City Code :");
-
-        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jLabel3.setText("City Name :");
-
-        jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jLabel4.setText("City UF :");
 
         jBInclude.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jBInclude.setText("Include");
@@ -446,6 +440,23 @@ public class JFRegister extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel4.setText("City UF :");
+
+        jTFCityName.setToolTipText("City Name");
+        jTFCityName.setName("DS_CITY"); // NOI18N
+        jTFCityName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFCityNameActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel3.setText("City Name :");
+
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel1.setText("City Code :");
+
         jButton1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jButton1.setText("Find");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -454,43 +465,48 @@ public class JFRegister extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jFTFCityCode.setToolTipText("City Code");
+        jFTFCityCode.setName("CD_CITY"); // NOI18N
+        jFTFCityCode.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jFTFCityCodeKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jFTFCityCodeKeyReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPRegisterCityLayout = new javax.swing.GroupLayout(jPRegisterCity);
+        jPRegisterCity.setLayout(jPRegisterCityLayout);
+        jPRegisterCityLayout.setHorizontalGroup(
+            jPRegisterCityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPRegisterCityLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPRegisterCityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel3)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTFCityCode, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPRegisterCityLayout.createSequentialGroup()
+                        .addComponent(jFTFCityCode, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jBInclude, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(28, 28, 28)
-                            .addComponent(jBAlter, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(28, 28, 28)
-                            .addComponent(jBDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                            .addComponent(jBCancelCity, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jTFCityName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTFCityName, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(jCBUF, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addContainerGap(182, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jPRegisterCityLayout.setVerticalGroup(
+            jPRegisterCityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPRegisterCityLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(1, 1, 1)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTFCityCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGroup(jPRegisterCityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPRegisterCityLayout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(jFTFCityCode, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPRegisterCityLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTFCityName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -498,7 +514,34 @@ public class JFRegister extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCBUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
+                .addContainerGap(220, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPRegisterCity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jBInclude, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(jBAlter, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(jBDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(jBCancelCity, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPRegisterCity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBInclude, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBAlter, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -539,7 +582,7 @@ public class JFRegister extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTFindCity.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jTFindCity.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         jScrollPane1.setViewportView(jTFindCity);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -585,7 +628,7 @@ public class JFRegister extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTPFindCityStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTPFindCityStateChanged
-        update();
+        valid();
     }//GEN-LAST:event_jTPFindCityStateChanged
 
     private void jPanel3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel3FocusGained
@@ -597,23 +640,22 @@ public class JFRegister extends javax.swing.JFrame {
     }//GEN-LAST:event_jBFindActionPerformed
 
     private void jBAlterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAlterActionPerformed
-        city.setCdCity(Integer.parseInt(jTFCityCode.getText()));
+        city.setCdCity(Integer.parseInt(jFTFCityCode.getText()));
         city.setDsCity(jTFCityName.getText());
         city.setDsUF(jCBUF.getSelectedItem().toString());
         city.alterCity();
-        update();
+        valid();
     }//GEN-LAST:event_jBAlterActionPerformed
 
     private void jBIncludeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBIncludeActionPerformed
+        validateField.validateRequiredFields(jPRegisterCity, "CITY");
+        if(validateField.getTest()){
         city.setDsCity(jTFCityName.getText());
         city.setDsUF(jCBUF.getSelectedItem().toString());
         city.includeCity();
-        update();
+        cleanfield.cleanField(jPRegisterCity);
+        }
     }//GEN-LAST:event_jBIncludeActionPerformed
-
-    private void jTFCityCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFCityCodeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFCityCodeActionPerformed
 
     private void jCBClientCityPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jCBClientCityPopupMenuWillBecomeInvisible
 
@@ -628,23 +670,23 @@ public class JFRegister extends javax.swing.JFrame {
         client.setCdClient(Integer.parseInt(jTFClientCode.getText()));
         getClientComponents();
         client.includeClient();
-        update();
+        valid();
     }//GEN-LAST:event_jBIncludeClientActionPerformed
 
     private void jBAlterClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAlterClientActionPerformed
         client.setCdClient(Integer.parseInt(jTFClientCode.getText()));
         getClientComponents();
         client.alterClient();
-        update();
+        valid();
     }//GEN-LAST:event_jBAlterClientActionPerformed
 
     private void jBCancelCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelCityActionPerformed
-        update();
+        
     }//GEN-LAST:event_jBCancelCityActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        city.setCdCity(Integer.parseInt(jTFCityCode.getText()));
-        jTFCityName.setText(fillJTable.getTextColumn(city.queryCode(), "DS_CITY"));
+        
+        jTFCityName.setText(fillJTable.getTextColumn("CITY", "DS_CITY", jTFCityCode));
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -731,15 +773,24 @@ public class JFRegister extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCBClientUFActionPerformed
 
-    private void update() {
-        jTFClientCode.setText(client.autoIncrement("CD_CLIENT", "CLIENT"));
-        jTFClientName.setText("");
-        jTFClientAddress.setText("");
-        jTFClientComplement.setText("");
-        jTFClientNumber.setText("");
-        jTFClientPhone.setText("");
-        jTFCityCode.setText(city.autoIncrement("CD_CITY", "CITY"));
-        jTFCityName.setText("");
+    private void jTFCityNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFCityNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFCityNameActionPerformed
+
+    private void jCBClientCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBClientCityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBClientCityActionPerformed
+
+    private void jFTFCityCodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFTFCityCodeKeyPressed
+        
+    }//GEN-LAST:event_jFTFCityCodeKeyPressed
+
+    private void jFTFCityCodeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFTFCityCodeKeyReleased
+        validateField.validateIntegerFields(jFTFCityCode);
+    }//GEN-LAST:event_jFTFCityCodeKeyReleased
+
+    private void valid() {
+        
     }
 
     /**
@@ -795,6 +846,7 @@ public class JFRegister extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jCBOtherFind;
     private javax.swing.JComboBox<String> jCBTipFind;
     private javax.swing.JComboBox<String> jCBUF;
+    private javax.swing.JFormattedTextField jFTFCityCode;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -806,6 +858,7 @@ public class JFRegister extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPRegisterCity;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -813,7 +866,6 @@ public class JFRegister extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTClientFind;
-    private javax.swing.JTextField jTFCityCode;
     private javax.swing.JTextField jTFCityName;
     private javax.swing.JTextField jTFClientAddress;
     private javax.swing.JTextField jTFClientCode;

@@ -5,11 +5,14 @@
  */
 package br.edu.projetointegrador.controlhe;
 
+import br.edu.projetointegrador.conexao.ConexaoOracle;
+import java.sql.ResultSet;
+
 /**
  *
  * @author CrasyFox
  */
-public class Cliente {
+public class Cliente extends ConexaoOracle{
     
     private int cdCliente;
     private String nmCliente;
@@ -23,6 +26,11 @@ public class Cliente {
     private int nrRGIE;
     private String dsCidade;
     private String dsUF;
+    
+    public ResultSet consultaGeral(){
+        executeSQL("SELECT * FROM CLIENTE WHERE CD_CLIENTE = " + getCdCliente());
+        return resultSet;
+    }
 
     public int getCdCliente() {
         return cdCliente;

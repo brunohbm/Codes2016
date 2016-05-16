@@ -13,28 +13,19 @@ import br.edu.grupointegrado.conexao.ConexaoOracle;
  */
 public class MovOsServicoProduto extends ConexaoOracle{
     
-    Servico servico = new Servico();
-    OS os = new OS();
-    Produto produto = new Produto();
-    double vlProduto;
-    int qtProduto;
+    private MovOsServico movServico = new MovOsServico();    
+    private Produto produto = new Produto();
+    private double vlProduto;
+    private double qtProduto;
 
-    public Servico getServico() {
-        return servico;
+    public MovOsServico getMovServico() {
+        return movServico;
     }
 
-    public void setServico(Servico servico) {
-        this.servico = servico;
+    public void setMovServico(MovOsServico movServico) {
+        this.movServico = movServico;
     }
-
-    public OS getOs() {
-        return os;
-    }
-
-    public void setOs(OS os) {
-        this.os = os;
-    }
-
+    
     public Produto getProduto() {
         return produto;
     }
@@ -51,11 +42,15 @@ public class MovOsServicoProduto extends ConexaoOracle{
         this.vlProduto = vlProduto;
     }
 
-    public int getQtProduto() {
+    public double getQtProduto() {
         return qtProduto;
     }
 
     public void setQtProduto(int qtProduto) {
         this.qtProduto = qtProduto;
+    }
+
+    public void incluir() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

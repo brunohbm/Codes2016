@@ -23,20 +23,21 @@ public class Operacao extends Statement {
     private String dtOperacao;
     private String hrOperacao;
     private double vlOperacao;
-    
-    public void cadastrar() {
-        super.registrar("OPERACAO", new Object[]{
-            super.autoIncrem("OPERACAO", "CD_OPERACAO"),
-            getContaFavorecida().getCdConta(),
-            getConta().getCdConta(),
-            tipoOperacao.getCdTipoOperacao(),
-            agencia.getBanco().getCdBanco(),
-            agencia.getCdAgencia(),
-            "22/03/2015",
-            "06/05/16 01:33:03,000000000",
-            getVlOperacao(),
-        }
-        );
+    StringBuffer str = new StringBuffer();
+
+    public void cadastrarComContaFavorecida() {
+        str.delete(0, str.length());
+        str.append("INSERT INTO OPERACAO (CD_OPERACAO, CD_CONTA_FAVORECIDA, CD_CONTA, CD_TIPO_OPERACAO, CD_BANCO, CD_AGENCIA, DT_OPERACAO, HR_OPERACAO, VL_OPERACAO) ");    
+        str.append("VALUES (");
+        str.append(autoIncrem("OPERACAO", "CD_OPERACAO")).append(", ");
+        str.append(getContaFavorecida().getCdConta()).append(", ");
+        str.append(getConta().getCdConta()).append(", ");
+        str.append(getTipoOperacao().getCdTipoOperacao()).append(", ");
+        str.append(getAgencia().getBanco().getCdBanco()).append(", ");
+        str.append(getAgencia().getCdAgencia()).append(", ");
+        str.append("TO CHAR (SYSDATE, 'dd-MM-yyyy'), ");
+        str.append();
+        str.append(getVlOperacao()).append(") ");
     }
 
     public int getCdOpercao() {
@@ -101,6 +102,10 @@ public class Operacao extends Statement {
 
     public void setVlOperacao(double vlOperacao) {
         this.vlOperacao = vlOperacao;
+    }
+
+    public void cadastrarSemContaFavorecida() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

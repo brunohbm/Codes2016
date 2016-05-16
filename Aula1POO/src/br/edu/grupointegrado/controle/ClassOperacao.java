@@ -16,20 +16,16 @@ public class ClassOperacao extends ConexaoOracle{
     
    private  int cdOperacao;
    private String dsOperacao;
-   private String tpOperacao;
-   private int inEstoque;
-   private int inFinanceiro;
+   private String tpOperacao;  
    
    public StringBuffer sql = new StringBuffer();
    
    public void incluirOperacao(){
        sql.delete(0, sql.length());
-       sql.append("INSERT INTO OPERACAO (CD_OPERACAO, DS_OPERACAO, TP_OPERACAO, IN_ESTOQUE, IN_FINANCEIRO) VALUES (");
+       sql.append("INSERT INTO OPERACAO (CD_OPERACAO, DS_OPERACAO, TP_OPERACAO) VALUES (");
        sql.append(conexao.autoIncrem("OPERACAO", "CD_OPERACAO")).append(", '");
        sql.append(getDsOperacao()).append("', '");
-       sql.append(getTpOperacao()).append("', ");
-       sql.append(getInEstoque()).append(", ");
-       sql.append(getInFinanceiro()).append(")");
+       sql.append(getTpOperacao()).append("')");
        incluirSQL(sql.toString());
    }
    
@@ -45,11 +41,7 @@ public class ClassOperacao extends ConexaoOracle{
       sql.append("UPDATE OPERACAO SET  DS_OPERACAO = '");
       sql.append(getDsOperacao()).append("', ");
       sql.append("TP_OPERACAO = '");
-      sql.append(getTpOperacao()).append("', ");
-      sql.append("IN_ESTOQUE = ");
-      sql.append(getInEstoque()).append(", ");
-      sql.append("IN_FINANCEIRO = ");
-      sql.append(getInFinanceiro()).append(" ");
+      sql.append(getTpOperacao()).append("' ");
       sql.append("WHERE CD_OPERACAO = ");
       sql.append(getCdOperacao());
       atualizarSQL(sql.toString());
@@ -106,22 +98,5 @@ public class ClassOperacao extends ConexaoOracle{
 
     public void setTpOperacao(String tpOperacao) {
         this.tpOperacao = tpOperacao;
-    }
-
-    public int getInEstoque() {
-        return inEstoque;
-    }
-
-    public void setInEstoque(int inEstoque) {
-        this.inEstoque = inEstoque;
-    }
-
-    public int getInFinanceiro() {
-        return inFinanceiro;
-    }
-
-    public void setInFinanceiro(int inFinanceiro) {
-        this.inFinanceiro = inFinanceiro;
-    }
-    
+    }    
 }

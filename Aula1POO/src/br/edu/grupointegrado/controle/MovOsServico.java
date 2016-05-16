@@ -6,6 +6,7 @@
 package br.edu.grupointegrado.controle;
 
 import br.edu.grupointegrado.conexao.ConexaoOracle;
+import br.edu.grupointegrado.ferramentas.Statement;
 
 /**
  *
@@ -16,8 +17,23 @@ public class MovOsServico extends ConexaoOracle{
     Servico servico = new Servico();
     OS os = new OS();
     double vlServico;
-    String qtHoras;
-
+    double qtHoras;
+    public Statement stmt = new Statement();
+    StringBuffer buffer = new StringBuffer
+    
+    public void incluir (){
+        stmt.registrar("MOV_OS_SERVICO", new Object[] {
+        getServico().getCdServico(),
+        getOs().getCdOS(),
+        getVlServico(),
+        getQtHoras()
+        });
+    }
+    
+    public void excluir (){
+        stmt.excluir("MOV_OS_SERVICO", "", retorno);
+    }
+    
     public Servico getServico() {
         return servico;
     }
@@ -42,11 +58,11 @@ public class MovOsServico extends ConexaoOracle{
         this.vlServico = vlServico;
     }
 
-    public String getQtHoras() {
+    public double getQtHoras() {
         return qtHoras;
     }
 
-    public void setQtHoras(String qtHoras) {
+    public void setQtHoras(double qtHoras) {
         this.qtHoras = qtHoras;
     }
     

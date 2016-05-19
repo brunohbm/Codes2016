@@ -19,9 +19,10 @@ public class MovOsServico extends ConexaoOracle{
     double vlServico;
     double qtHoras;
     public Statement stmt = new Statement();
-    StringBuffer buffer = new StringBuffer
+    StringBuffer buffer = new StringBuffer();
     
-    public void incluir (){
+
+    public void incluir(){
         stmt.registrar("MOV_OS_SERVICO", new Object[] {
         getServico().getCdServico(),
         getOs().getCdOS(),

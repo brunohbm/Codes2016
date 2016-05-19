@@ -218,7 +218,7 @@ public class ProjetoPOO extends javax.swing.JFrame {
                 java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                true, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -231,6 +231,7 @@ public class ProjetoPOO extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTServico);
 
+        jTPeca.setForeground(new java.awt.Color(51, 51, 51));
         jTPeca.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -243,7 +244,7 @@ public class ProjetoPOO extends javax.swing.JFrame {
                 java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                true, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -575,7 +576,7 @@ public class ProjetoPOO extends javax.swing.JFrame {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         jTPOS.addTab("Consulta", jPanel2);
@@ -585,16 +586,15 @@ public class ProjetoPOO extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTPOS, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jTPOS)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTPOS, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jTPOS, javax.swing.GroupLayout.PREFERRED_SIZE, 533, Short.MAX_VALUE))
         );
 
         pack();
@@ -637,7 +637,7 @@ public class ProjetoPOO extends javax.swing.JFrame {
     }//GEN-LAST:event_jBAddServicoActionPerformed
 
     private void jBTirarServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTirarServicoActionPerformed
-        // TODO add your handling code here:
+        excluirServico();
     }//GEN-LAST:event_jBTirarServicoActionPerformed
 
     private void jBPesquisarPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPesquisarPecaActionPerformed
@@ -657,11 +657,11 @@ public class ProjetoPOO extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFQuantidadePecaActionPerformed
 
     private void jBAddPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAddPecaActionPerformed
-        // TODO add your handling code here:
+        incluirPecas();
     }//GEN-LAST:event_jBAddPecaActionPerformed
 
     private void jBRetirarPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRetirarPecaActionPerformed
-        // TODO add your handling code here:
+        excluirPeca();
     }//GEN-LAST:event_jBRetirarPecaActionPerformed
 
     private void jBNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNovoActionPerformed
@@ -817,9 +817,9 @@ public class ProjetoPOO extends javax.swing.JFrame {
         int conta = 0;
         int index = 0;
 
-        for (int cont = 1; cont <= totalLinha; cont++) {
-            String cdServico = (String) tabelaPeca.getValueAt(cont, 1);
-            if (jTFCodigoPeca.getText().equals(cdServico)) {
+        for (int cont = 0; cont < totalLinha; cont++) {
+            String cdPeca = (String) tabelaPeca.getValueAt(cont, 2);
+            if (jTFCodigoPeca.getText().equals(cdPeca)) {
                 int opcaoEscolhida = JOptionPane.showConfirmDialog(null, "Serviço já cadastrado deseja alterar horas e valor ", "Alteração", JOptionPane.YES_NO_OPTION);
                 if (opcaoEscolhida == JOptionPane.YES_OPTION) {
                     situacao = true;
@@ -836,10 +836,10 @@ public class ProjetoPOO extends javax.swing.JFrame {
             tabelaPeca.setValueAt((false), x, 0);
             String codigo = (String) jTServico.getValueAt(jTServico.getSelectedRow(), 1);
             tabelaPeca.setValueAt(codigo, x, 1);
-            tabelaPeca.setValueAt(jTFCodigoPeca, x, 2);
-            tabelaPeca.setValueAt(jTFPeca, x, 3);
-            tabelaPeca.setValueAt(jTFValorPeca, x, 4);
-            tabelaPeca.setValueAt(jTFQuantidadePeca, x, 5);
+            tabelaPeca.setValueAt(jTFCodigoPeca.getText(), x, 2);
+            tabelaPeca.setValueAt(jTFPeca.getText(), x, 3);
+            tabelaPeca.setValueAt(jTFValorPeca.getText(), x, 4);
+            tabelaPeca.setValueAt(jTFQuantidadePeca.getText(), x, 5);
             double valor = (Double.parseDouble(jTFValorPeca.getText().replaceAll(",", ".")) * Double.parseDouble(jTFQuantidadePeca.getText().replaceAll(",", ".")));
             tabelaPeca.setValueAt(valor, index, 6);
 
@@ -850,8 +850,8 @@ public class ProjetoPOO extends javax.swing.JFrame {
 
         } else {
 
-            tabelaPeca.setValueAt(jTFValorPeca, x, 4);
-            tabelaPeca.setValueAt(jTFQuantidadePeca, x, 5);
+            tabelaPeca.setValueAt(jTFValorPeca.getText(), index, 4);
+            tabelaPeca.setValueAt(jTFQuantidadePeca.getText(), index, 5);
             double valor = (Double.parseDouble(jTFValorPeca.getText().replaceAll(",", ".")) * Double.parseDouble(jTFQuantidadePeca.getText().replaceAll(",", ".")));
             tabelaPeca.setValueAt(valor, index, 6);
 
@@ -860,6 +860,28 @@ public class ProjetoPOO extends javax.swing.JFrame {
             jTFValorPeca.setText("");
             jTFQuantidadePeca.setText("");
         }
+    }
+    
+    public void excluirPeca() {
+        DefaultTableModel tabelaPeca = (DefaultTableModel) jTPeca.getModel();
+        int totalLinha = jTPeca.getRowCount();
+        int cont = 0;
+        boolean selec = false;
+
+        int opcao = JOptionPane.showConfirmDialog(null, "Deseja remover as peças selecionadas ? ", "Remover", JOptionPane.YES_NO_OPTION);
+        if (opcao == JOptionPane.YES_NO_OPTION){
+            for (cont = totalLinha - 1; cont >= 0; cont--){
+                boolean selecionado = (Boolean) jTPeca.getValueAt(cont, 0);
+                if (selecionado){
+                    selec = true;
+                    tabelaPeca.removeRow(cont);
+                }
+            }
+            if( ! (selec)){
+                JOptionPane.showMessageDialog(null, "Não ha registros selecionados");
+            }
+        }
+        
     }
     
     public void excluirServico() {

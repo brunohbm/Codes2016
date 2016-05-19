@@ -38,8 +38,8 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="jTPOS" min="-2" pref="672" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jTPOS" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -48,8 +48,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTPOS" min="-2" pref="513" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jTPOS" pref="533" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -409,7 +408,7 @@
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="6" rowCount="0">
-                        <Column editable="false" title="Sel" type="java.lang.Boolean"/>
+                        <Column editable="true" title="Sel" type="java.lang.Boolean"/>
                         <Column editable="false" title="Cod.Servi&#xe7;o" type="java.lang.Object"/>
                         <Column editable="false" title="Servi&#xe7;o" type="java.lang.Object"/>
                         <Column editable="false" title="Horas" type="java.lang.Object"/>
@@ -430,9 +429,12 @@
               <SubComponents>
                 <Component class="javax.swing.JTable" name="jTPeca">
                   <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="33" green="33" red="33" type="rgb"/>
+                    </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="7" rowCount="0">
-                        <Column editable="false" title="Sel" type="java.lang.Boolean"/>
+                        <Column editable="true" title="Sel" type="java.lang.Boolean"/>
                         <Column editable="false" title="Servi&#xe7;o" type="java.lang.Object"/>
                         <Column editable="false" title="Cod.Pe&#xe7;a" type="java.lang.Object"/>
                         <Column editable="false" title="Desc.Pe&#xe7;a" type="java.lang.Object"/>
@@ -692,7 +694,7 @@
                       <Component id="jScrollPane4" min="-2" pref="142" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane5" min="-2" pref="142" max="-2" attributes="0"/>
-                      <EmptySpace pref="7" max="32767" attributes="0"/>
+                      <EmptySpace pref="27" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
